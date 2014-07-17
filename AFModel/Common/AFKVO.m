@@ -184,7 +184,6 @@
 	AFKVOContext *context = [self _contextForObservable: observable];
     if (context == nil)
     {
-        AFAssert(NO);
         return;
     }
 		
@@ -193,8 +192,7 @@
         objectForKey: keyPath];
     if (binding == nil)
     {
-        AFAssert(NO);
-        return;
+		return;
     }
     
 	// Skip if target isn't set, or is deallocated.
