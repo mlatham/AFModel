@@ -32,6 +32,7 @@
 		C9A7C2271978736100C367AC /* AFModel-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9A7C2171978736100C367AC /* AFModel-Info.plist */; };
 		C9A7C2281978736100C367AC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9A7C2191978736100C367AC /* InfoPlist.strings */; };
 		C9A7C2291978736100C367AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C21A1978736100C367AC /* main.m */; };
+		C9A7C231197875BD00C367AC /* AFReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C230197875BD00C367AC /* AFReachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,8 @@
 		C9A7C2181978736100C367AC /* AFModel-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFModel-Prefix.pch"; sourceTree = "<group>"; };
 		C9A7C2191978736100C367AC /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		C9A7C21A1978736100C367AC /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C9A7C22F197875BD00C367AC /* AFReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFReachability.h; sourceTree = "<group>"; };
+		C9A7C230197875BD00C367AC /* AFReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFReachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +246,8 @@
 				C9A7C20A1978736100C367AC /* AFMetamacros.h */,
 				C9A7C20B1978736100C367AC /* AFMutableArray.h */,
 				C9A7C20C1978736100C367AC /* AFMutableArray.m */,
+				C9A7C22F197875BD00C367AC /* AFReachability.h */,
+				C9A7C230197875BD00C367AC /* AFReachability.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -443,6 +448,7 @@
 				C9A7C2251978736100C367AC /* AFPropertyInfo.m in Sources */,
 				C9A7C21B1978736100C367AC /* AFAppDelegate.m in Sources */,
 				C9A7C2231978736100C367AC /* AFObjectModel.m in Sources */,
+				C9A7C231197875BD00C367AC /* AFReachability.m in Sources */,
 				C9A7C21C1978736100C367AC /* AFViewController.m in Sources */,
 				C9A7C2201978736100C367AC /* AFArrayView.m in Sources */,
 				C9A7C2211978736100C367AC /* AFKVO.m in Sources */,

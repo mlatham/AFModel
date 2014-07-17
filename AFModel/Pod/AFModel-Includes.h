@@ -15,3 +15,6 @@
 #import "AFObjectProvider.h"
 #import "AFObjectModel.h"
 #import "AFRelationship.h"
+
+// TODO: Move to a networking project.
+#import "AFReachability.h"
