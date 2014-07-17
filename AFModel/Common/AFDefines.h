@@ -1,11 +1,11 @@
-#include <assert.h>
+/* Logging */
+#ifndef AFLog
+	#import "AFLogHelper.h"
 
-/* Assertion */
-#ifndef AFAssert
 	#ifdef DEBUG
-		#define AFAssert(expression) assert(expression)
+		#define AFLog(level, format, ...) AF_log(level, format, ##__VA_ARGS__)
 	#else
-		#define AFAssert(expression) do { } while (0)
+		#define AFLog(level, format, ...) do { } while (0)
 	#endif
 #endif
 

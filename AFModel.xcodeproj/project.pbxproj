@@ -92,6 +92,7 @@
 		C9A7C1651978565000C367AC /* AFDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDefines.h; sourceTree = "<group>"; };
 		C9A7C1661978567F00C367AC /* AFModel-Includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFModel-Includes.h"; sourceTree = "<group>"; };
 		C9A7C1671978574300C367AC /* AFModel.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AFModel.podspec; sourceTree = "<group>"; };
+		C9A7C16B19785C7600C367AC /* AFLogHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFLogHelper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +218,7 @@
 				C9A7C1631978560300C367AC /* AFKeypath.h */,
 				C9A7C13B1978558500C367AC /* AFKVO.h */,
 				C9A7C13C1978558500C367AC /* AFKVO.m */,
+				C9A7C16B19785C7600C367AC /* AFLogHelper.h */,
 				C9A7C1641978560300C367AC /* AFMetamacros.h */,
 				C9A7C13E1978558500C367AC /* AFMutableArray.h */,
 				C9A7C13F1978558500C367AC /* AFMutableArray.m */,
