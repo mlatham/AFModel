@@ -14,6 +14,8 @@ Pod::Spec.new do |s|
   s.source_files		= 'AFModel/Pod/**/*.{h,m}'
   s.public_header_files = 'AFModel/Pod/**/*.h'
 
+  s.prefix_header_contents = '#import "AFModel-Includes.h"'
+
   s.platform			= :ios, "6.0"
   s.requires_arc		= true
 
