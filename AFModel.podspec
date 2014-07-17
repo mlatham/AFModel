@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
   s.social_media_url	= "https://twitter.com/mattlath"
   
   s.source				= { :git => "https://github.com/mlatham/AFModel.git", :tag => "v0.1.0" }
-  s.source_files		= 'AFModel/**/*.{h,m}'
-  s.public_header_files = 'AFModel/Classes/**/*.h'
+  s.source_files		= 'AFModel/Pod/**/*.{h,m}'
+  s.public_header_files = 'AFModel/Pod/**/*.h'
 
   s.platform			= :ios, "6.0"
   s.requires_arc		= true

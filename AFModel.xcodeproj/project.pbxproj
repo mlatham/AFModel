@@ -17,20 +17,21 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		86AE39292A5E421AA6D666AC /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A8AE346F5D470A8B80C0DD /* libPods-Tests.a */; };
-		C9A7C1541978558500C367AC /* NSObject+Runtime.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C1351978558500C367AC /* NSObject+Runtime.m */; };
-		C9A7C1551978558500C367AC /* AFArray.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C1381978558500C367AC /* AFArray.m */; };
-		C9A7C1561978558500C367AC /* AFArrayView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C13A1978558500C367AC /* AFArrayView.m */; };
-		C9A7C1571978558500C367AC /* AFKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C13C1978558500C367AC /* AFKVO.m */; };
-		C9A7C1581978558500C367AC /* AFMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C13F1978558500C367AC /* AFMutableArray.m */; };
-		C9A7C1591978558500C367AC /* AFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C1421978558500C367AC /* AFAppDelegate.m */; };
-		C9A7C15A1978558500C367AC /* AFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C1441978558500C367AC /* AFViewController.m */; };
-		C9A7C15B1978558500C367AC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9A7C1451978558500C367AC /* Images.xcassets */; };
-		C9A7C15C1978558500C367AC /* AFObjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C1481978558500C367AC /* AFObjectModel.m */; };
-		C9A7C15D1978558500C367AC /* AFObjectProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C14A1978558500C367AC /* AFObjectProvider.m */; };
-		C9A7C15E1978558500C367AC /* AFPropertyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C14C1978558500C367AC /* AFPropertyInfo.m */; };
-		C9A7C15F1978558500C367AC /* AFRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C14E1978558500C367AC /* AFRelationship.m */; };
-		C9A7C1611978558500C367AC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9A7C1521978558500C367AC /* InfoPlist.strings */; };
-		C9A7C1621978558500C367AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C1531978558500C367AC /* main.m */; };
+		C9A7C21B1978736100C367AC /* AFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C1F71978736100C367AC /* AFAppDelegate.m */; };
+		C9A7C21C1978736100C367AC /* AFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C1F91978736100C367AC /* AFViewController.m */; };
+		C9A7C21D1978736100C367AC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9A7C1FA1978736100C367AC /* Images.xcassets */; };
+		C9A7C21E1978736100C367AC /* NSObject+Runtime.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C1FF1978736100C367AC /* NSObject+Runtime.m */; };
+		C9A7C21F1978736100C367AC /* AFArray.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C2021978736100C367AC /* AFArray.m */; };
+		C9A7C2201978736100C367AC /* AFArrayView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C2041978736100C367AC /* AFArrayView.m */; };
+		C9A7C2211978736100C367AC /* AFKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C2081978736100C367AC /* AFKVO.m */; };
+		C9A7C2221978736100C367AC /* AFMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C20C1978736100C367AC /* AFMutableArray.m */; };
+		C9A7C2231978736100C367AC /* AFObjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C20F1978736100C367AC /* AFObjectModel.m */; };
+		C9A7C2241978736100C367AC /* AFObjectProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C2111978736100C367AC /* AFObjectProvider.m */; };
+		C9A7C2251978736100C367AC /* AFPropertyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C2131978736100C367AC /* AFPropertyInfo.m */; };
+		C9A7C2261978736100C367AC /* AFRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C2151978736100C367AC /* AFRelationship.m */; };
+		C9A7C2271978736100C367AC /* AFModel-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9A7C2171978736100C367AC /* AFModel-Info.plist */; };
+		C9A7C2281978736100C367AC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9A7C2191978736100C367AC /* InfoPlist.strings */; };
+		C9A7C2291978736100C367AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C21A1978736100C367AC /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,39 +61,39 @@
 		ACD8EABB703140DB9D49DDB8 /* Pods-AFModel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AFModel.xcconfig"; path = "Pods/Pods-AFModel.xcconfig"; sourceTree = "<group>"; };
 		C9776FBB197852AC00A58ABD /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C9776FBD197852AC00A58ABD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		C9A7C1341978558500C367AC /* NSObject+Runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Runtime.h"; sourceTree = "<group>"; };
-		C9A7C1351978558500C367AC /* NSObject+Runtime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Runtime.m"; sourceTree = "<group>"; };
-		C9A7C1371978558500C367AC /* AFArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFArray.h; sourceTree = "<group>"; };
-		C9A7C1381978558500C367AC /* AFArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFArray.m; sourceTree = "<group>"; };
-		C9A7C1391978558500C367AC /* AFArrayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFArrayView.h; sourceTree = "<group>"; };
-		C9A7C13A1978558500C367AC /* AFArrayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFArrayView.m; sourceTree = "<group>"; };
-		C9A7C13B1978558500C367AC /* AFKVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFKVO.h; sourceTree = "<group>"; };
-		C9A7C13C1978558500C367AC /* AFKVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFKVO.m; sourceTree = "<group>"; };
-		C9A7C13E1978558500C367AC /* AFMutableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFMutableArray.h; sourceTree = "<group>"; };
-		C9A7C13F1978558500C367AC /* AFMutableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFMutableArray.m; sourceTree = "<group>"; };
-		C9A7C1411978558500C367AC /* AFAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAppDelegate.h; sourceTree = "<group>"; };
-		C9A7C1421978558500C367AC /* AFAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAppDelegate.m; sourceTree = "<group>"; };
-		C9A7C1431978558500C367AC /* AFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFViewController.h; sourceTree = "<group>"; };
-		C9A7C1441978558500C367AC /* AFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFViewController.m; sourceTree = "<group>"; };
-		C9A7C1451978558500C367AC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		C9A7C1471978558500C367AC /* AFObjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFObjectModel.h; sourceTree = "<group>"; };
-		C9A7C1481978558500C367AC /* AFObjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFObjectModel.m; sourceTree = "<group>"; };
-		C9A7C1491978558500C367AC /* AFObjectProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFObjectProvider.h; sourceTree = "<group>"; };
-		C9A7C14A1978558500C367AC /* AFObjectProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFObjectProvider.m; sourceTree = "<group>"; };
-		C9A7C14B1978558500C367AC /* AFPropertyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyInfo.h; sourceTree = "<group>"; };
-		C9A7C14C1978558500C367AC /* AFPropertyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPropertyInfo.m; sourceTree = "<group>"; };
-		C9A7C14D1978558500C367AC /* AFRelationship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRelationship.h; sourceTree = "<group>"; };
-		C9A7C14E1978558500C367AC /* AFRelationship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRelationship.m; sourceTree = "<group>"; };
-		C9A7C1501978558500C367AC /* AFModel-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AFModel-Info.plist"; sourceTree = "<group>"; };
-		C9A7C1511978558500C367AC /* AFModel-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFModel-Prefix.pch"; sourceTree = "<group>"; };
-		C9A7C1521978558500C367AC /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
-		C9A7C1531978558500C367AC /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C9A7C1631978560300C367AC /* AFKeypath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFKeypath.h; sourceTree = "<group>"; };
-		C9A7C1641978560300C367AC /* AFMetamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFMetamacros.h; sourceTree = "<group>"; };
-		C9A7C1651978565000C367AC /* AFDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDefines.h; sourceTree = "<group>"; };
-		C9A7C1661978567F00C367AC /* AFModel-Includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFModel-Includes.h"; sourceTree = "<group>"; };
 		C9A7C1671978574300C367AC /* AFModel.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AFModel.podspec; sourceTree = "<group>"; };
-		C9A7C16B19785C7600C367AC /* AFLogHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFLogHelper.h; sourceTree = "<group>"; };
+		C9A7C1F61978736100C367AC /* AFAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAppDelegate.h; sourceTree = "<group>"; };
+		C9A7C1F71978736100C367AC /* AFAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAppDelegate.m; sourceTree = "<group>"; };
+		C9A7C1F81978736100C367AC /* AFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFViewController.h; sourceTree = "<group>"; };
+		C9A7C1F91978736100C367AC /* AFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFViewController.m; sourceTree = "<group>"; };
+		C9A7C1FA1978736100C367AC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C9A7C1FC1978736100C367AC /* AFModel-Includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFModel-Includes.h"; sourceTree = "<group>"; };
+		C9A7C1FE1978736100C367AC /* NSObject+Runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Runtime.h"; sourceTree = "<group>"; };
+		C9A7C1FF1978736100C367AC /* NSObject+Runtime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Runtime.m"; sourceTree = "<group>"; };
+		C9A7C2011978736100C367AC /* AFArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFArray.h; sourceTree = "<group>"; };
+		C9A7C2021978736100C367AC /* AFArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFArray.m; sourceTree = "<group>"; };
+		C9A7C2031978736100C367AC /* AFArrayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFArrayView.h; sourceTree = "<group>"; };
+		C9A7C2041978736100C367AC /* AFArrayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFArrayView.m; sourceTree = "<group>"; };
+		C9A7C2051978736100C367AC /* AFDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDefines.h; sourceTree = "<group>"; };
+		C9A7C2061978736100C367AC /* AFKeypath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFKeypath.h; sourceTree = "<group>"; };
+		C9A7C2071978736100C367AC /* AFKVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFKVO.h; sourceTree = "<group>"; };
+		C9A7C2081978736100C367AC /* AFKVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFKVO.m; sourceTree = "<group>"; };
+		C9A7C2091978736100C367AC /* AFLogHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFLogHelper.h; sourceTree = "<group>"; };
+		C9A7C20A1978736100C367AC /* AFMetamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFMetamacros.h; sourceTree = "<group>"; };
+		C9A7C20B1978736100C367AC /* AFMutableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFMutableArray.h; sourceTree = "<group>"; };
+		C9A7C20C1978736100C367AC /* AFMutableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFMutableArray.m; sourceTree = "<group>"; };
+		C9A7C20E1978736100C367AC /* AFObjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFObjectModel.h; sourceTree = "<group>"; };
+		C9A7C20F1978736100C367AC /* AFObjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFObjectModel.m; sourceTree = "<group>"; };
+		C9A7C2101978736100C367AC /* AFObjectProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFObjectProvider.h; sourceTree = "<group>"; };
+		C9A7C2111978736100C367AC /* AFObjectProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFObjectProvider.m; sourceTree = "<group>"; };
+		C9A7C2121978736100C367AC /* AFPropertyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyInfo.h; sourceTree = "<group>"; };
+		C9A7C2131978736100C367AC /* AFPropertyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPropertyInfo.m; sourceTree = "<group>"; };
+		C9A7C2141978736100C367AC /* AFRelationship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRelationship.h; sourceTree = "<group>"; };
+		C9A7C2151978736100C367AC /* AFRelationship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRelationship.m; sourceTree = "<group>"; };
+		C9A7C2171978736100C367AC /* AFModel-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AFModel-Info.plist"; sourceTree = "<group>"; };
+		C9A7C2181978736100C367AC /* AFModel-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFModel-Prefix.pch"; sourceTree = "<group>"; };
+		C9A7C2191978736100C367AC /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
+		C9A7C21A1978736100C367AC /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,12 +160,9 @@
 		6003F593195388D20070C39A /* AFModel */ = {
 			isa = PBXGroup;
 			children = (
-				C9A7C1661978567F00C367AC /* AFModel-Includes.h */,
-				C9A7C1331978558500C367AC /* Categories */,
-				C9A7C1361978558500C367AC /* Common */,
-				C9A7C1401978558500C367AC /* Demo */,
-				C9A7C1461978558500C367AC /* ObjectProvider */,
-				C9A7C14F1978558500C367AC /* Supporting Files */,
+				C9A7C1F51978736100C367AC /* Example */,
+				C9A7C1FB1978736100C367AC /* Pod */,
+				C9A7C2161978736100C367AC /* Supporting Files */,
 			);
 			path = AFModel;
 			sourceTree = "<group>";
@@ -198,68 +196,79 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		C9A7C1331978558500C367AC /* Categories */ = {
+		C9A7C1F51978736100C367AC /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				C9A7C1341978558500C367AC /* NSObject+Runtime.h */,
-				C9A7C1351978558500C367AC /* NSObject+Runtime.m */,
+				C9A7C1FA1978736100C367AC /* Images.xcassets */,
+				C9A7C1F61978736100C367AC /* AFAppDelegate.h */,
+				C9A7C1F71978736100C367AC /* AFAppDelegate.m */,
+				C9A7C1F81978736100C367AC /* AFViewController.h */,
+				C9A7C1F91978736100C367AC /* AFViewController.m */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		C9A7C1FB1978736100C367AC /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				C9A7C1FC1978736100C367AC /* AFModel-Includes.h */,
+				C9A7C1FD1978736100C367AC /* Categories */,
+				C9A7C2001978736100C367AC /* Common */,
+				C9A7C20D1978736100C367AC /* ObjectProvider */,
+			);
+			path = Pod;
+			sourceTree = "<group>";
+		};
+		C9A7C1FD1978736100C367AC /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				C9A7C1FE1978736100C367AC /* NSObject+Runtime.h */,
+				C9A7C1FF1978736100C367AC /* NSObject+Runtime.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
 		};
-		C9A7C1361978558500C367AC /* Common */ = {
+		C9A7C2001978736100C367AC /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				C9A7C1371978558500C367AC /* AFArray.h */,
-				C9A7C1381978558500C367AC /* AFArray.m */,
-				C9A7C1391978558500C367AC /* AFArrayView.h */,
-				C9A7C13A1978558500C367AC /* AFArrayView.m */,
-				C9A7C1651978565000C367AC /* AFDefines.h */,
-				C9A7C1631978560300C367AC /* AFKeypath.h */,
-				C9A7C13B1978558500C367AC /* AFKVO.h */,
-				C9A7C13C1978558500C367AC /* AFKVO.m */,
-				C9A7C16B19785C7600C367AC /* AFLogHelper.h */,
-				C9A7C1641978560300C367AC /* AFMetamacros.h */,
-				C9A7C13E1978558500C367AC /* AFMutableArray.h */,
-				C9A7C13F1978558500C367AC /* AFMutableArray.m */,
+				C9A7C2011978736100C367AC /* AFArray.h */,
+				C9A7C2021978736100C367AC /* AFArray.m */,
+				C9A7C2031978736100C367AC /* AFArrayView.h */,
+				C9A7C2041978736100C367AC /* AFArrayView.m */,
+				C9A7C2051978736100C367AC /* AFDefines.h */,
+				C9A7C2061978736100C367AC /* AFKeypath.h */,
+				C9A7C2071978736100C367AC /* AFKVO.h */,
+				C9A7C2081978736100C367AC /* AFKVO.m */,
+				C9A7C2091978736100C367AC /* AFLogHelper.h */,
+				C9A7C20A1978736100C367AC /* AFMetamacros.h */,
+				C9A7C20B1978736100C367AC /* AFMutableArray.h */,
+				C9A7C20C1978736100C367AC /* AFMutableArray.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
 		};
-		C9A7C1401978558500C367AC /* Demo */ = {
+		C9A7C20D1978736100C367AC /* ObjectProvider */ = {
 			isa = PBXGroup;
 			children = (
-				C9A7C1411978558500C367AC /* AFAppDelegate.h */,
-				C9A7C1421978558500C367AC /* AFAppDelegate.m */,
-				C9A7C1431978558500C367AC /* AFViewController.h */,
-				C9A7C1441978558500C367AC /* AFViewController.m */,
-				C9A7C1451978558500C367AC /* Images.xcassets */,
-			);
-			path = Demo;
-			sourceTree = "<group>";
-		};
-		C9A7C1461978558500C367AC /* ObjectProvider */ = {
-			isa = PBXGroup;
-			children = (
-				C9A7C1471978558500C367AC /* AFObjectModel.h */,
-				C9A7C1481978558500C367AC /* AFObjectModel.m */,
-				C9A7C1491978558500C367AC /* AFObjectProvider.h */,
-				C9A7C14A1978558500C367AC /* AFObjectProvider.m */,
-				C9A7C14B1978558500C367AC /* AFPropertyInfo.h */,
-				C9A7C14C1978558500C367AC /* AFPropertyInfo.m */,
-				C9A7C14D1978558500C367AC /* AFRelationship.h */,
-				C9A7C14E1978558500C367AC /* AFRelationship.m */,
+				C9A7C20E1978736100C367AC /* AFObjectModel.h */,
+				C9A7C20F1978736100C367AC /* AFObjectModel.m */,
+				C9A7C2101978736100C367AC /* AFObjectProvider.h */,
+				C9A7C2111978736100C367AC /* AFObjectProvider.m */,
+				C9A7C2121978736100C367AC /* AFPropertyInfo.h */,
+				C9A7C2131978736100C367AC /* AFPropertyInfo.m */,
+				C9A7C2141978736100C367AC /* AFRelationship.h */,
+				C9A7C2151978736100C367AC /* AFRelationship.m */,
 			);
 			path = ObjectProvider;
 			sourceTree = "<group>";
 		};
-		C9A7C14F1978558500C367AC /* Supporting Files */ = {
+		C9A7C2161978736100C367AC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C9A7C1501978558500C367AC /* AFModel-Info.plist */,
-				C9A7C1511978558500C367AC /* AFModel-Prefix.pch */,
-				C9A7C1521978558500C367AC /* InfoPlist.strings */,
-				C9A7C1531978558500C367AC /* main.m */,
+				C9A7C2171978736100C367AC /* AFModel-Info.plist */,
+				C9A7C2181978736100C367AC /* AFModel-Prefix.pch */,
+				C9A7C2191978736100C367AC /* InfoPlist.strings */,
+				C9A7C21A1978736100C367AC /* main.m */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -345,8 +354,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9A7C15B1978558500C367AC /* Images.xcassets in Resources */,
-				C9A7C1611978558500C367AC /* InfoPlist.strings in Resources */,
+				C9A7C21D1978736100C367AC /* Images.xcassets in Resources */,
+				C9A7C2281978736100C367AC /* InfoPlist.strings in Resources */,
+				C9A7C2271978736100C367AC /* AFModel-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,18 +438,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9A7C15F1978558500C367AC /* AFRelationship.m in Sources */,
-				C9A7C15D1978558500C367AC /* AFObjectProvider.m in Sources */,
-				C9A7C15E1978558500C367AC /* AFPropertyInfo.m in Sources */,
-				C9A7C1561978558500C367AC /* AFArrayView.m in Sources */,
-				C9A7C15C1978558500C367AC /* AFObjectModel.m in Sources */,
-				C9A7C1571978558500C367AC /* AFKVO.m in Sources */,
-				C9A7C1581978558500C367AC /* AFMutableArray.m in Sources */,
-				C9A7C1551978558500C367AC /* AFArray.m in Sources */,
-				C9A7C15A1978558500C367AC /* AFViewController.m in Sources */,
-				C9A7C1541978558500C367AC /* NSObject+Runtime.m in Sources */,
-				C9A7C1621978558500C367AC /* main.m in Sources */,
-				C9A7C1591978558500C367AC /* AFAppDelegate.m in Sources */,
+				C9A7C2261978736100C367AC /* AFRelationship.m in Sources */,
+				C9A7C2241978736100C367AC /* AFObjectProvider.m in Sources */,
+				C9A7C2251978736100C367AC /* AFPropertyInfo.m in Sources */,
+				C9A7C21B1978736100C367AC /* AFAppDelegate.m in Sources */,
+				C9A7C2231978736100C367AC /* AFObjectModel.m in Sources */,
+				C9A7C21C1978736100C367AC /* AFViewController.m in Sources */,
+				C9A7C2201978736100C367AC /* AFArrayView.m in Sources */,
+				C9A7C2211978736100C367AC /* AFKVO.m in Sources */,
+				C9A7C21F1978736100C367AC /* AFArray.m in Sources */,
+				C9A7C21E1978736100C367AC /* NSObject+Runtime.m in Sources */,
+				C9A7C2291978736100C367AC /* main.m in Sources */,
+				C9A7C2221978736100C367AC /* AFMutableArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
