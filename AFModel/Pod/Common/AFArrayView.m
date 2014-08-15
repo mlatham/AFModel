@@ -329,11 +329,10 @@
 {
 	NSUInteger index = 0;
 	NSUInteger topIndex = [array count];
-	IMP objectAtIndexImp = [array methodForSelector: @selector(objectAtIndex:)];
 	while (index < topIndex) 
 	{
 		NSUInteger midIndex = (index + topIndex) / 2;
-		id testObject = objectAtIndexImp(array, @selector(objectAtIndex:), midIndex);
+		id testObject = [array objectAtIndex: midIndex];
 		if (_comparator == nil || _comparator(object, testObject) > 0)
 		{
 			index = midIndex + 1;
