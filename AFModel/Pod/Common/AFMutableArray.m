@@ -90,5 +90,14 @@
 	[self removeObjectsAtIndexes: indexSet];
 }
 
+- (void)sortUsingComparator: (NSComparator)comparator
+{
+	// Sort the array of objects using the provided comparator.
+	NSArray *sortedObjects = [_objects sortedArrayUsingComparator: comparator];
+	
+	// Assign the sorted objects.
+	self.objects = [sortedObjects mutableCopy];
+}
+
 
 @end

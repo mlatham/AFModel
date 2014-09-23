@@ -43,5 +43,7 @@
 
 - (void)removeAllObjectsWithoutSetting;
 
+- (void)sortUsingComparator: (NSComparator)comparator;
+
 
 @end
