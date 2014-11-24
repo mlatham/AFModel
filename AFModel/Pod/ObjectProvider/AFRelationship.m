@@ -372,7 +372,7 @@
 			init];
 	}
 	else if ([className isEqualToString: @"NSMutableOrderedSet"]
-		|| [className isEqualToString: @"NSMutableSet"])
+		|| [className isEqualToString: @"NSOrderedSet"])
 	{
 		return [[NSMutableOrderedSet alloc]
 			init];
