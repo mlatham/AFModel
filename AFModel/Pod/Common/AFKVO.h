@@ -27,5 +27,7 @@
 - (void)stopObserving: (NSObject *)observable
     forKeyPath: (NSString *)keyPath;
 
+- (void)removeAllObservers;
+
 
 @end

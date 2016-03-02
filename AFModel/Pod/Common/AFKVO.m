@@ -70,21 +70,8 @@
 
 - (void)dealloc 
 {
-    // Remove all remaining contexts.
-    for (AFKVOContext *context in _contexts)
-    {      
-		NSMutableDictionary *keyPathBindings = context->keyPathBindings;
-		NSObject *observable = context->observable;
-		
-        // Stop observing for all keypaths.
-        for (NSString *keyPath in keyPathBindings)
-        {
-            // Stop observing.
-            [observable removeObserver: self
-                forKeyPath: keyPath
-				context: (__bridge void *)context];
-        }
-    }
+	// Remove all observers.
+	[self removeAllObservers];
 }
 
 
@@ -170,6 +157,28 @@
 	
 	// Remove binding.
 	[context->keyPathBindings removeObjectForKey: keyPath];
+}
+
+- (void)removeAllObservers
+{
+	// Remove all remaining contexts.
+    for (AFKVOContext *context in _contexts)
+    {      
+		NSMutableDictionary *keyPathBindings = context->keyPathBindings;
+		NSObject *observable = context->observable;
+		
+        // Stop observing for all keypaths.
+        for (NSString *keyPath in keyPathBindings)
+        {
+            // Stop observing.
+            [observable removeObserver: self
+                forKeyPath: keyPath
+				context: (__bridge void *)context];
+        }
+    }
+	
+	// Clear the contexts array.
+	[_contexts removeAllObjects];
 }
 
 
