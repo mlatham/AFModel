@@ -231,6 +231,11 @@
 	return result;
 }
 
+- (AFPropertyInfo *)propertyInfoForTarget: (id)target
+{
+	return [[target class] propertyInfoForPropertyName: propertyName];
+}
+
 
 #pragma mark - Private Methods
 
@@ -249,7 +254,7 @@
 	provider: (AFObjectProvider *)provider
 {
 	// Get the property info - has one relationships are defined by their property type.
-	AFPropertyInfo *propertyInfo = [[target class] propertyInfoForPropertyName: propertyName];
+	AFPropertyInfo *propertyInfo = [self propertyInfoForTarget: target];
 	
 	// Attempt to transform the value.
 	id transformedValue = [self transformValue: value
@@ -267,7 +272,7 @@
 	provider: (AFObjectProvider *)provider
 {
 	// Get the property info - this is used to determine collection type for has-many relationships.
-	AFPropertyInfo *propertyInfo = [[target class] propertyInfoForPropertyName: propertyName];
+	AFPropertyInfo *propertyInfo = [self propertyInfoForTarget: target];
 	
 	// Assign to read-only properties.
 	BOOL needsAssignment = propertyInfo.isReadonly == NO;
