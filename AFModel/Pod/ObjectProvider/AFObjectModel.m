@@ -99,33 +99,36 @@ static __strong NSMutableDictionary *_objectModelsByClassName;
 		relationships: relationships];
 }
 
-+ (instancetype)objectModelForClass: (Class)myClass
++ (instancetype)objectModelForClassName: (NSString *)className
 {
 	AFObjectModel *objectModel = nil;
 	
 	// Only try to get the object model if the class is set.
-	if (AFIsNull(myClass) == NO)
+	if (AFIsNull(className) == NO)
 	{
-		NSString *myClassName = NSStringFromClass(myClass);
-		
-		objectModel = _objectModelsByClassName[myClassName];
+		objectModel = _objectModelsByClassName[className];
 		
 		// Create the object models on demand.
 		if (objectModel == nil)
 		{
-			id myClassObject = (id)myClass;
+			id myClassObject = NSClassFromString(className);
 			
 			if ([myClassObject conformsToProtocol: @protocol(AFObjectModel)])
 			{
 				objectModel = [myClassObject objectModel];
 				
 				// Cache each object model by class name.
-				_objectModelsByClassName[myClassName] = objectModel;
+				_objectModelsByClassName[className] = objectModel;
 			}
 		}
 	}
 	
 	return objectModel;
+}
+
++ (instancetype)objectModelForClass: (Class)myClass
+{
+	return [self objectModelForClassName: NSStringFromClass(myClass)];
 }
 
 + (NSDictionary *)objectModels

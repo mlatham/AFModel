@@ -64,6 +64,8 @@
 
 + (instancetype)objectModelWithRelationships: (NSDictionary *)relationships;
 
++ (instancetype)objectModelForClassName: (NSString *)className;
+
 + (instancetype)objectModelForClass: (Class)myClass;
 
 // Dictionary of object models by class name (NSString).
