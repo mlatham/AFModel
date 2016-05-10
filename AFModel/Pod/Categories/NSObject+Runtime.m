@@ -20,9 +20,10 @@ static char PROPERTY_INFO_KEY;
 // object on this class.
 
 + (AFPropertyInfo *)propertyInfoForPropertyName: (NSString *)propertyName
+	class: (Class)class
 {
-	// Get the property info map for this type, or create it.
-	NSMutableDictionary *propertyInfoMap = (NSMutableDictionary *)objc_getAssociatedObject(self, &PROPERTY_INFO_KEY);
+		// Get the property info map for this type, or create it.
+	NSMutableDictionary *propertyInfoMap = (NSMutableDictionary *)objc_getAssociatedObject(class, &PROPERTY_INFO_KEY);
 	
 	// Create the property info map.
 	if (propertyInfoMap == nil)
@@ -30,7 +31,7 @@ static char PROPERTY_INFO_KEY;
 		propertyInfoMap = [[NSMutableDictionary alloc]
 			init];
 			
-		objc_setAssociatedObject(self, &PROPERTY_INFO_KEY, propertyInfoMap, OBJC_ASSOCIATION_RETAIN);
+		objc_setAssociatedObject(class, &PROPERTY_INFO_KEY, propertyInfoMap, OBJC_ASSOCIATION_RETAIN);
 	}
 	
 	// Check if the property info is cached.
@@ -42,7 +43,7 @@ static char PROPERTY_INFO_KEY;
 		unsigned int outCount;
 		
 		// Get this class's property metadata. This array needs to be freed.
-		objc_property_t *properties = class_copyPropertyList(self, &outCount);
+		objc_property_t *properties = class_copyPropertyList(class, &outCount);
 		
 		// Find the property with the provided name.
 		for (int i = 0; i < outCount; i++)
@@ -129,6 +130,19 @@ static char PROPERTY_INFO_KEY;
 		
 	// Return the property info, or nil if it didn't exist on this class.
 	return result;
+}
+
++ (AFPropertyInfo *)propertyInfoForPropertyName: (NSString *)propertyName
+	className: (NSString *)className
+{
+	return [self propertyInfoForPropertyName: propertyName
+		class: NSClassFromString(className)];
+}
+
++ (AFPropertyInfo *)propertyInfoForPropertyName: (NSString *)propertyName
+{
+	return [self propertyInfoForPropertyName: propertyName
+		class: self];
 }
 
 

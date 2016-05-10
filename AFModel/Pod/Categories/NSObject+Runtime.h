@@ -10,6 +10,12 @@
 
 // Gets the property info for a class.
 
++ (AFPropertyInfo *)propertyInfoForPropertyName: (NSString *)propertyName
+	class: (Class)class;
+
++ (AFPropertyInfo *)propertyInfoForPropertyName: (NSString *)propertyName
+	className: (NSString *)className;
+
 + (AFPropertyInfo *)propertyInfoForPropertyName: (NSString *)propertyName;
 
 
