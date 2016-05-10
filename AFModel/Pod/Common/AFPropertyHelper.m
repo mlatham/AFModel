@@ -1,4 +1,4 @@
-#import "NSObject+Runtime.h"
+#import "AFPropertyHelper.h"
 #import <objc/runtime.h>
 
 
@@ -10,7 +10,7 @@ static char PROPERTY_INFO_KEY;
 
 #pragma mark - Class Definition
 
-@implementation NSObject (Runtime)
+@implementation AFPropertyHelper
 
 
 #pragma mark - Public Methods
@@ -137,12 +137,6 @@ static char PROPERTY_INFO_KEY;
 {
 	return [self propertyInfoForPropertyName: propertyName
 		class: NSClassFromString(className)];
-}
-
-+ (AFPropertyInfo *)propertyInfoForPropertyName: (NSString *)propertyName
-{
-	return [self propertyInfoForPropertyName: propertyName
-		class: self];
 }
 
 

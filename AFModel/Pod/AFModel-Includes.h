@@ -2,13 +2,11 @@
 #import "AFDefines.h"
 #import "AFKeypath.h"
 
-// Categories
-#import "NSObject+Runtime.h"
-
 // Common
 #import "AFArray.h"
 #import "AFArrayView.h"
 #import "AFMutableArray.h"
+#import "AFPropertyHelper.h"
 #import "AFKVO.h"
 
 // Object provider

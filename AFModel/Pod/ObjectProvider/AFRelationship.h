@@ -56,7 +56,8 @@ typedef enum
 	toClass: (Class)toClass
 	provider: (AFObjectProvider *)provider;
 
-- (AFPropertyInfo *)propertyInfoForTarget: (id)target;
+- (AFPropertyInfo *)propertyInfoForTarget: (id)target
+	propertyName: (NSString *)propertyName;
 
 
 @end

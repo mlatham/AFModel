@@ -3,7 +3,7 @@
 
 #pragma mark Class Interface
 
-@interface NSObject (Runtime)
+@interface AFPropertyHelper : NSObject
 
 
 #pragma mark - Static Methods
@@ -15,8 +15,6 @@
 
 + (AFPropertyInfo *)propertyInfoForPropertyName: (NSString *)propertyName
 	className: (NSString *)className;
-
-+ (AFPropertyInfo *)propertyInfoForPropertyName: (NSString *)propertyName;
 
 
 @end

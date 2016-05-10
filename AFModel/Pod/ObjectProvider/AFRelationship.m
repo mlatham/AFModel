@@ -1,6 +1,5 @@
 #import "AFRelationship.h"
 #import "AFPropertyInfo.h"
-#import "NSObject+Runtime.h"
 
 
 #pragma mark Class Definition
@@ -232,8 +231,10 @@
 }
 
 - (AFPropertyInfo *)propertyInfoForTarget: (id)target
+	propertyName: (NSString *)propertyName
 {
-	return [[target class] propertyInfoForPropertyName: propertyName];
+	return [AFPropertyHelper propertyInfoForPropertyName: propertyName
+		class: [target class]];
 }
 
 
@@ -254,7 +255,8 @@
 	provider: (AFObjectProvider *)provider
 {
 	// Get the property info - has one relationships are defined by their property type.
-	AFPropertyInfo *propertyInfo = [self propertyInfoForTarget: target];
+	AFPropertyInfo *propertyInfo = [self propertyInfoForTarget: target
+		propertyName: propertyName];
 	
 	// Attempt to transform the value.
 	id transformedValue = [self transformValue: value
@@ -272,7 +274,8 @@
 	provider: (AFObjectProvider *)provider
 {
 	// Get the property info - this is used to determine collection type for has-many relationships.
-	AFPropertyInfo *propertyInfo = [self propertyInfoForTarget: target];
+	AFPropertyInfo *propertyInfo = [self propertyInfoForTarget: target
+		propertyName: propertyName];
 	
 	// Assign to read-only properties.
 	BOOL needsAssignment = propertyInfo.isReadonly == NO;

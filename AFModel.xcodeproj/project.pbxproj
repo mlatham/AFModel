@@ -16,11 +16,11 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		812A9F8C1CE23EDE00F48CFE /* AFPropertyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 812A9F8B1CE23EDE00F48CFE /* AFPropertyHelper.m */; };
 		86AE39292A5E421AA6D666AC /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A8AE346F5D470A8B80C0DD /* libPods-Tests.a */; };
 		C9A7C21B1978736100C367AC /* AFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C1F71978736100C367AC /* AFAppDelegate.m */; };
 		C9A7C21C1978736100C367AC /* AFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C1F91978736100C367AC /* AFViewController.m */; };
 		C9A7C21D1978736100C367AC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9A7C1FA1978736100C367AC /* Images.xcassets */; };
-		C9A7C21E1978736100C367AC /* NSObject+Runtime.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C1FF1978736100C367AC /* NSObject+Runtime.m */; };
 		C9A7C21F1978736100C367AC /* AFArray.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C2021978736100C367AC /* AFArray.m */; };
 		C9A7C2201978736100C367AC /* AFArrayView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C2041978736100C367AC /* AFArrayView.m */; };
 		C9A7C2211978736100C367AC /* AFKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C2081978736100C367AC /* AFKVO.m */; };
@@ -58,6 +58,8 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		812A9F8A1CE23EDE00F48CFE /* AFPropertyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyHelper.h; sourceTree = "<group>"; };
+		812A9F8B1CE23EDE00F48CFE /* AFPropertyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPropertyHelper.m; sourceTree = "<group>"; };
 		ACD8EABB703140DB9D49DDB8 /* Pods-AFModel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AFModel.xcconfig"; path = "Pods/Pods-AFModel.xcconfig"; sourceTree = "<group>"; };
 		C9776FBB197852AC00A58ABD /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C9776FBD197852AC00A58ABD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -68,8 +70,6 @@
 		C9A7C1F91978736100C367AC /* AFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFViewController.m; sourceTree = "<group>"; };
 		C9A7C1FA1978736100C367AC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C9A7C1FC1978736100C367AC /* AFModel-Includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFModel-Includes.h"; sourceTree = "<group>"; };
-		C9A7C1FE1978736100C367AC /* NSObject+Runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Runtime.h"; sourceTree = "<group>"; };
-		C9A7C1FF1978736100C367AC /* NSObject+Runtime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Runtime.m"; sourceTree = "<group>"; };
 		C9A7C2011978736100C367AC /* AFArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFArray.h; sourceTree = "<group>"; };
 		C9A7C2021978736100C367AC /* AFArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFArray.m; sourceTree = "<group>"; };
 		C9A7C2031978736100C367AC /* AFArrayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFArrayView.h; sourceTree = "<group>"; };
@@ -214,20 +214,10 @@
 			isa = PBXGroup;
 			children = (
 				C9A7C1FC1978736100C367AC /* AFModel-Includes.h */,
-				C9A7C1FD1978736100C367AC /* Categories */,
 				C9A7C2001978736100C367AC /* Common */,
 				C9A7C20D1978736100C367AC /* ObjectProvider */,
 			);
 			path = Pod;
-			sourceTree = "<group>";
-		};
-		C9A7C1FD1978736100C367AC /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				C9A7C1FE1978736100C367AC /* NSObject+Runtime.h */,
-				C9A7C1FF1978736100C367AC /* NSObject+Runtime.m */,
-			);
-			path = Categories;
 			sourceTree = "<group>";
 		};
 		C9A7C2001978736100C367AC /* Common */ = {
@@ -245,6 +235,8 @@
 				C9A7C20A1978736100C367AC /* AFMetamacros.h */,
 				C9A7C20B1978736100C367AC /* AFMutableArray.h */,
 				C9A7C20C1978736100C367AC /* AFMutableArray.m */,
+				812A9F8A1CE23EDE00F48CFE /* AFPropertyHelper.h */,
+				812A9F8B1CE23EDE00F48CFE /* AFPropertyHelper.m */,
 				C9A7C22F197875BD00C367AC /* AFReachability.h */,
 				C9A7C230197875BD00C367AC /* AFReachability.m */,
 			);
@@ -451,7 +443,7 @@
 				C9A7C2201978736100C367AC /* AFArrayView.m in Sources */,
 				C9A7C2211978736100C367AC /* AFKVO.m in Sources */,
 				C9A7C21F1978736100C367AC /* AFArray.m in Sources */,
-				C9A7C21E1978736100C367AC /* NSObject+Runtime.m in Sources */,
+				812A9F8C1CE23EDE00F48CFE /* AFPropertyHelper.m in Sources */,
 				C9A7C2291978736100C367AC /* main.m in Sources */,
 				C9A7C2221978736100C367AC /* AFMutableArray.m in Sources */,
 			);
