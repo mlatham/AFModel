@@ -26,7 +26,8 @@
 - (id)updateOrCreate: (Class)myClass
 	values: (NSDictionary *)values;
 
-- (void)update: (id)object
+- (void)update: (Class)myClass
+	instance: (id)instance
 	values: (NSDictionary *)values;
 
 

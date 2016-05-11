@@ -90,7 +90,8 @@
 	// Update the instance, if created.
 	if (AFIsNull(instance) == NO)
 	{
-		[self update: instance
+		[self update: myClass
+			instance: instance
 			values: values];
 	}
 	
@@ -167,18 +168,18 @@
 	// Update the instance, if it exists.
 	if (AFIsNull(instance) == NO)
 	{
-		[self update: instance
+		[self update: myClass
+			instance: instance
 			values: values];
 	}
 	
 	return instance;
 }
 
-- (void)update: (id)object
+- (void)update: (Class)myClass
+	instance: (id)instance
 	values: (NSDictionary *)values
 {
-	Class myClass = [object class];
-	
 	id myClassObject = (id)myClass;
 	
 	// Object models are cached by the AFObjectModel class.
@@ -204,7 +205,7 @@
 					@try
 					{
 						// Use the relationship to get and set the value.
-						[relationship update: object
+						[relationship update: instance
 							values: values
 							propertyName: propertyKeyPath
 							provider: self];
@@ -223,7 +224,7 @@
 	// Call the update method, if implemented.
 	if ([myClassObject respondsToSelector: @selector(update:values:provider:)] == YES)
 	{
-		[myClassObject update: object
+		[myClassObject update: instance
 			values: values
 			provider: self];
 	}
