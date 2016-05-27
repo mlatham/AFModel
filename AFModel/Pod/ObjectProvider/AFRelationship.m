@@ -277,8 +277,9 @@
 	AFPropertyInfo *propertyInfo = [self propertyInfoForTarget: target
 		propertyName: propertyName];
 	
-	// Assign to read-only properties.
-	BOOL needsAssignment = propertyInfo.isReadonly == NO;
+	// Assign to non-read-only properties. RLMArrays (Realm arrays) also shouldn't be assigned.
+	BOOL needsAssignment = propertyInfo.isReadonly == NO
+		&& [propertyInfo.propertyClassName isEqualToString: @"RLMArray"] == NO;
 	
 	// Generate a mutable collection suitable for either assignment or update.
 	id mutableCollection = needsAssignment
@@ -355,7 +356,8 @@
 	}
 	else if ([propertyClassName isEqualToString: @"NSMutableArray"]
 		|| [propertyClassName isEqualToString: @"NSMutableSet"]
-		|| [propertyClassName isEqualToString: @"NSMutableOrderedSet"])
+		|| [propertyClassName isEqualToString: @"NSMutableOrderedSet"]
+		|| [propertyClassName isEqualToString: @"RLMArray"])
 	{
 		// Get mutable collection property values.
 		return [target valueForKeyPath: propertyName];
