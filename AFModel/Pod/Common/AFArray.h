@@ -43,19 +43,14 @@
 
 - (NSInteger)count;
 
+- (BOOL)containsObject: (id)object;
+
 - (id)objectAtIndex: (NSUInteger)index;
 
 
 #pragma mark - Set KVO Methods
 
 - (NSEnumerator *)enumeratorOfObjects;
-
-
-#pragma mark - Public Methods
-
-- (NSUInteger)count;
-
-- (BOOL)containsObject: (id)object;
 
 
 @end

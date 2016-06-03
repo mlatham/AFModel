@@ -125,6 +125,11 @@
 	return [_objects count];
 }
 
+- (BOOL)containsObject: (id)object
+{
+	return [_objects containsObject: object];
+}
+
 - (id)objectAtIndex: (NSUInteger)index
 {
 	return [_objects objectAtIndex: index];
@@ -136,19 +141,6 @@
 - (NSEnumerator *)enumeratorOfObjects
 {
 	return [_objects objectEnumerator];
-}
-
-
-#pragma mark - Public Methods
-
-- (NSUInteger)count
-{
-	return [_objects count];
-}
-
-- (BOOL)containsObject: (id)object
-{
-	return [_objects containsObject: object];
 }
 
 
