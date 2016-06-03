@@ -39,6 +39,13 @@
 - (NSArray *)objectsAtIndexes: (NSIndexSet *)indexes;
 
 
+#pragma mark - Array-Like Methods
+
+- (NSInteger)count;
+
+- (id)objectAtIndex: (NSUInteger)index;
+
+
 #pragma mark - Set KVO Methods
 
 - (NSEnumerator *)enumeratorOfObjects;

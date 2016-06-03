@@ -118,6 +118,19 @@
 }
 
 
+#pragma mark - Array-Like Methods
+
+- (NSInteger)count
+{
+	return [_objects count];
+}
+
+- (id)objectAtIndex: (NSUInteger)index
+{
+	return [_objects objectAtIndex: index];
+}
+
+
 #pragma mark - Set KVO Methods
 
 - (NSEnumerator *)enumeratorOfObjects
