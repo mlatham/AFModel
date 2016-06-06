@@ -9,6 +9,9 @@
 #import "AFPropertyHelper.h"
 #import "AFKVO.h"
 
+// SQLite helpers
+#import "AFDBClient.h"
+
 // Object provider
 #import "AFObjectProvider.h"
 #import "AFObjectModel.h"
