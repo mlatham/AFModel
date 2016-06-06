@@ -19,7 +19,6 @@
 		812A9F8C1CE23EDE00F48CFE /* AFPropertyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 812A9F8B1CE23EDE00F48CFE /* AFPropertyHelper.m */; };
 		813A6D611D05C808006D43E5 /* AFDBClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 813A6D601D05C808006D43E5 /* AFDBClient.m */; };
 		813A6D641D05CE3D006D43E5 /* AFDBOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 813A6D631D05CE3D006D43E5 /* AFDBOperation.m */; };
-		813A6D671D05D422006D43E5 /* AFFileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 813A6D661D05D422006D43E5 /* AFFileHelper.m */; };
 		813A6D691D05D524006D43E5 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 813A6D681D05D524006D43E5 /* libsqlite3.tbd */; };
 		86AE39292A5E421AA6D666AC /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A8AE346F5D470A8B80C0DD /* libPods-Tests.a */; };
 		C9A7C21B1978736100C367AC /* AFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C1F71978736100C367AC /* AFAppDelegate.m */; };
@@ -68,8 +67,6 @@
 		813A6D601D05C808006D43E5 /* AFDBClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDBClient.m; sourceTree = "<group>"; };
 		813A6D621D05CE3D006D43E5 /* AFDBOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDBOperation.h; sourceTree = "<group>"; };
 		813A6D631D05CE3D006D43E5 /* AFDBOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDBOperation.m; sourceTree = "<group>"; };
-		813A6D651D05D422006D43E5 /* AFFileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFFileHelper.h; sourceTree = "<group>"; };
-		813A6D661D05D422006D43E5 /* AFFileHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFFileHelper.m; sourceTree = "<group>"; };
 		813A6D681D05D524006D43E5 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		ACD8EABB703140DB9D49DDB8 /* Pods-AFModel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AFModel.xcconfig"; path = "Pods/Pods-AFModel.xcconfig"; sourceTree = "<group>"; };
 		C9776FBB197852AC00A58ABD /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -218,8 +215,6 @@
 				813A6D601D05C808006D43E5 /* AFDBClient.m */,
 				813A6D621D05CE3D006D43E5 /* AFDBOperation.h */,
 				813A6D631D05CE3D006D43E5 /* AFDBOperation.m */,
-				813A6D651D05D422006D43E5 /* AFFileHelper.h */,
-				813A6D661D05D422006D43E5 /* AFFileHelper.m */,
 			);
 			path = Sqlite;
 			sourceTree = "<group>";
@@ -460,7 +455,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				813A6D671D05D422006D43E5 /* AFFileHelper.m in Sources */,
 				C9A7C2261978736100C367AC /* AFRelationship.m in Sources */,
 				813A6D611D05C808006D43E5 /* AFDBClient.m in Sources */,
 				813A6D641D05CE3D006D43E5 /* AFDBOperation.m in Sources */,

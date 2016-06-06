@@ -1,11 +1,17 @@
 #import "AFDBClient.h"
-#import "AFFileHelper.h"
 #import "AFDBOperation.h"
 
 
 #pragma mark Constants
 
 static NSString * const AFDBExtension = @"sqlite";
+
+
+#pragma mark - Class Variables
+
+static NSFileManager *_fileManager;
+static NSBundle *_mainBundle;
+static NSURL *_documentsURL;
 
 
 #pragma mark - Class Definition
@@ -22,6 +28,28 @@ static NSString * const AFDBExtension = @"sqlite";
 
 #pragma mark - Constructors
 
++ (void)initialize
+{
+	static BOOL classInitialized = NO;
+	
+	if (!classInitialized)
+	{
+		classInitialized = YES;
+	
+		// Set the file manager.
+		_fileManager = [NSFileManager defaultManager];
+		
+		// Get the main bundle.
+		_mainBundle = [NSBundle mainBundle];
+		
+		// Get documents folder root.
+		_documentsURL = [[_fileManager
+			URLsForDirectory: NSDocumentDirectory 
+			inDomains: NSUserDomainMask] 
+			objectAtIndex: 0];
+	}
+}
+
 - (id)initWithDatabaseNamed: (NSString *)databaseName
 {
     // Abort if base constructor fails.
@@ -32,10 +60,10 @@ static NSString * const AFDBExtension = @"sqlite";
 
 	// Ensure database file is copied into documents folder.
 	NSString *databaseFile = [NSString stringWithFormat: @"%@.%@", databaseName, AFDBExtension];
-	_databaseURL = [AFFileHelper documentsURLByAppendingPath: databaseFile];
+	_databaseURL = [_documentsURL URLByAppendingPathComponent: databaseFile];
 	
 	// Initialize the database, if it doesn't already exist.
-	if ([AFFileHelper documentsFileExists: databaseFile] == NO)
+	if ([AFDBClient AF_documentsFileExists: databaseFile] == NO)
 	{
 		BOOL initialized = [AFDBClient initializeDatabaseNamed: databaseName 
 			overwrite: NO];
@@ -104,13 +132,13 @@ static NSString * const AFDBExtension = @"sqlite";
 	NSString *databaseFile = [NSString stringWithFormat: @"%@.%@", databaseName, AFDBExtension];
 
 	// Determine database target URL.
-	NSURL *databaseURL = [AFFileHelper documentsURLByAppendingPath: databaseFile];
+	NSURL *databaseURL = [_documentsURL URLByAppendingPathComponent: databaseFile];
 
 	// Determine database source URL.
-    NSURL *databaseBundleURL = [AFFileHelper mainBundleURLForFile: databaseFile];
+    NSURL *databaseBundleURL = [self AF_mainBundleURLForFile: databaseFile];
 
 	// Copy database from bundle, if not yet created.
-	BOOL copied = [AFFileHelper copyFileFrom: databaseBundleURL
+	BOOL copied = [self AF_copyFileFrom: databaseBundleURL
 		to: databaseURL
 		overwrite: overwrite];
 		
@@ -235,6 +263,66 @@ static NSString * const AFDBExtension = @"sqlite";
 	UIApplication *application = [UIApplication sharedApplication];
 	[application endBackgroundTask: _exitBackgroundTask];
     _exitBackgroundTask = UIBackgroundTaskInvalid;
+}
+
++ (BOOL)AF_documentsFileExists: (NSString *)file
+{
+	NSURL *url = [_documentsURL URLByAppendingPathComponent: file
+		isDirectory: NO];
+	BOOL isDirectory = NO;
+	BOOL exists = [_fileManager fileExistsAtPath: [url path]
+		isDirectory: &isDirectory];
+	return exists && !isDirectory;
+}
+
++ (NSURL *)AF_mainBundleURLForFile: (NSString *)file
+{	
+	NSString *fileName = [[file lastPathComponent] stringByDeletingPathExtension];
+	NSString *extension = [file pathExtension];
+	return [_mainBundle URLForResource: fileName 
+		withExtension: extension];
+}
+
++ (BOOL)AF_copyFileFrom: (NSURL *)sourceURL
+	to: (NSURL *)targetURL
+	overwrite: (BOOL)overwrite
+{
+	// handle file already existing
+    if ([_fileManager fileExistsAtPath: [targetURL path]] == YES)
+    {
+        // skip if not overwriting
+        if (overwrite == NO)
+        {
+            return YES;
+        }
+        
+        // otherwise, delete file (or abort if delete fails
+        NSError *error = nil;
+        if ([_fileManager removeItemAtURL: targetURL 
+            error: &error] == NO)
+        {
+            AFLog(AFLogLevelDebug, @"Failed to delete file at '%@' before overwriting: %@",
+                [targetURL absoluteString], [error localizedDescription]);
+            return NO;
+        }
+    }
+    
+    // copy file
+    NSError *error = nil;
+    [_fileManager copyItemAtURL: sourceURL 
+        toURL: targetURL 
+		error: &error];
+        
+    // handle error
+    if (error != nil)
+    {
+        AFLog(AFLogLevelDebug, @"Failed to copy file from '%@' to '%@': %@", [sourceURL absoluteString],
+            [targetURL absoluteString], [error localizedDescription]);
+        return NO;
+    }
+    
+	// return success
+	return YES;
 }
 
 
