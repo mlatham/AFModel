@@ -18,8 +18,10 @@ static NSURL *_documentsURL;
 
 @implementation AFDBClient
 {
+	@private BOOL _connected;
 	@private sqlite3 *_database;
 	@private NSURL *_databaseURL;
+	@private NSString *_databaseName;
 	@private NSRecursiveLock *_databaseLock;
 	@private NSOperationQueue *_asyncQueryQueue;
 	@private UIBackgroundTaskIdentifier _exitBackgroundTask;
@@ -61,6 +63,7 @@ static NSURL *_documentsURL;
 	// Ensure database file is copied into documents folder.
 	NSString *databaseFile = [NSString stringWithFormat: @"%@.%@", databaseName, AFDBExtension];
 	_databaseURL = [_documentsURL URLByAppendingPathComponent: databaseFile];
+	_databaseName = databaseName;
 	
 	// Initialize instance variables.
     _databaseLock = [[NSRecursiveLock alloc]
@@ -68,27 +71,9 @@ static NSURL *_documentsURL;
     _asyncQueryQueue = [[NSOperationQueue alloc]
         init];
     [_asyncQueryQueue setMaxConcurrentOperationCount: 1];
-    
-    // Create database connection.
-	if (sqlite3_open([[_databaseURL path] UTF8String], &_database) != SQLITE_OK)
-	{
-        AFLog(AFLogLevelError, @"Unable to connect to database '%@': %s", databaseName,
-            sqlite3_errmsg(_database));
-	}
-
-    // Enable foreign key support.
-    else if (sqlite3_exec(_database, "PRAGMA foreign_keys = ON", NULL, NULL, NULL) != SQLITE_OK)
-    {
-        AFLog(AFLogLevelError, @"Unable to activate database foreign key support: %s", 
-            sqlite3_errmsg(_database));
-    }
 	
-	// Register for notifications.
-	[[NSNotificationCenter defaultCenter]
-		addObserver: self
-		selector: @selector(AF_applicationDidEnterBackground)
-		name: UIApplicationDidEnterBackgroundNotification
-		object: nil];
+	// Open the database connection.
+	[self openConnection];
 
     // Return initialized instance.
 	return self;
@@ -99,17 +84,8 @@ static NSURL *_documentsURL;
 
 - (void)dealloc 
 {
-	// Unregister notifications.
-	[[NSNotificationCenter defaultCenter]
-		removeObserver: self 
-		name: UIApplicationDidEnterBackgroundNotification 
-		object: nil];
-
-	// Reset (ensures any async operations are stopped).
-	[self reset];
-	
-	// Close database connection.
-	sqlite3_close(_database);
+	// Close the connection.
+	[self closeConnection];
 }
 
 
@@ -193,9 +169,82 @@ static NSURL *_documentsURL;
     }
 }
 
-- (void)reset
+- (void)resetOperationQueue
 {
     [_asyncQueryQueue cancelAllOperations];
+}
+
+- (void)resetDatabase
+{
+	// Close the connection.
+	[self closeConnection];
+	
+	// Delete the database file.
+	NSError *error = nil;
+	if ([_fileManager removeItemAtURL: _databaseURL
+		error: &error] == NO)
+	{
+		AFLog(AFLogLevelDebug, @"Failed to delete file at '%@' before overwiting: %@",
+			[_databaseURL absoluteString], [error localizedDescription]);
+	}
+	
+	// Re-open the connection.
+	[self openConnection];
+}
+
+- (void)closeConnection
+{
+	if (_connected == NO)
+	{
+		return;
+	}
+
+	// Unregister notifications.
+	[[NSNotificationCenter defaultCenter]
+		removeObserver: self 
+		name: UIApplicationDidEnterBackgroundNotification 
+		object: nil];
+
+	// Reset (ensures any async operations are stopped).
+	[self resetOperationQueue];
+	
+	// Close database connection.
+	sqlite3_close(_database);
+	
+	// Track connection state.
+	_connected = NO;
+}
+
+- (void)openConnection
+{
+	if (_connected == YES)
+	{
+		return;
+	}
+
+	// Create database connection.
+	if (sqlite3_open([[_databaseURL path] UTF8String], &_database) != SQLITE_OK)
+	{
+        AFLog(AFLogLevelError, @"Unable to connect to database '%@': %s", _databaseName,
+            sqlite3_errmsg(_database));
+	}
+
+	// Enable foreign key support.
+	else if (sqlite3_exec(_database, "PRAGMA foreign_keys = ON", NULL, NULL, NULL) != SQLITE_OK)
+	{
+		AFLog(AFLogLevelError, @"Unable to activate database foreign key support: %s", 
+			sqlite3_errmsg(_database));
+	}
+	
+	// Register for notifications.
+	[[NSNotificationCenter defaultCenter]
+		addObserver: self
+		selector: @selector(AF_applicationDidEnterBackground)
+		name: UIApplicationDidEnterBackgroundNotification
+		object: nil];
+	
+	// Track connection state.
+	_connected = YES;
 }
 
 

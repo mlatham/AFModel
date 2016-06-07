@@ -149,11 +149,15 @@ static inline void AFRollbackTransaction(sqlite3 *database)
 
 - (DBExecutionToken)beginExecution: (SQLTaskDelegate)task
 	completion: (SQLCompletedDelegate)completion;
-- (BOOL)isExecutionCompleted: (DBExecutionToken)token;
-- (void)endExecution: (DBExecutionToken)token;
-- (void)cancelExecution: (DBExecutionToken)token;
 
-- (void)reset;
+- (BOOL)isExecutionCompleted: (DBExecutionToken)token;
+
+- (void)cancelExecution: (DBExecutionToken)token;
+- (void)endExecution: (DBExecutionToken)token;
+
+- (void)resetOperationQueue;
+
+- (void)resetDatabase;
 
 
 @end
