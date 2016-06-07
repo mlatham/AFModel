@@ -5,6 +5,12 @@
 @interface AFKVO : NSObject
 
 
+#pragma mark - Properties
+
+// Defaults to true.
+@property (nonatomic, assign) BOOL callOnUIThread;
+
+
 #pragma mark - Constructors
 
 - (id)initWithTarget: (NSObject *)target;

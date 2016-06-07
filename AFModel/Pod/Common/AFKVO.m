@@ -210,6 +210,30 @@
 		return;
 	}
 	
+	if (self.callOnUIThread
+		&& [NSThread isMainThread] == NO)
+	{
+		// Call back on the UI-thread.
+		dispatch_async(dispatch_get_main_queue(), ^
+		{
+			[self _notify: binding
+				change: change
+				observable: observable];
+		});
+	}
+	else
+	{
+		// Call back directly.
+		[self _notify: binding
+			change: change
+			observable: observable];
+	}
+}
+
+- (void)_notify: (AFKVOBinding *)binding
+	change: (NSDictionary *)change
+	observable: (id)observable
+{
 	// Notify observer.
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
