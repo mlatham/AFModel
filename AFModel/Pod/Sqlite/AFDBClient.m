@@ -62,17 +62,6 @@ static NSURL *_documentsURL;
 	NSString *databaseFile = [NSString stringWithFormat: @"%@.%@", databaseName, AFDBExtension];
 	_databaseURL = [_documentsURL URLByAppendingPathComponent: databaseFile];
 	
-	// Initialize the database, if it doesn't already exist.
-	if ([AFDBClient AF_documentsFileExists: databaseFile] == NO)
-	{
-		BOOL initialized = [AFDBClient initializeDatabaseNamed: databaseName 
-			overwrite: NO];
-		if (initialized == NO)
-		{
-			return nil;
-		}
-	}
-	
 	// Initialize instance variables.
     _databaseLock = [[NSRecursiveLock alloc]
         init];
@@ -125,31 +114,6 @@ static NSURL *_documentsURL;
 
 
 #pragma mark - Public Methods
-
-+ (BOOL)initializeDatabaseNamed: (NSString *)databaseName
-	overwrite: (BOOL) overwrite
-{
-	NSString *databaseFile = [NSString stringWithFormat: @"%@.%@", databaseName, AFDBExtension];
-
-	// Determine database target URL.
-	NSURL *databaseURL = [_documentsURL URLByAppendingPathComponent: databaseFile];
-
-	// Determine database source URL.
-    NSURL *databaseBundleURL = [self AF_mainBundleURLForFile: databaseFile];
-
-	// Copy database from bundle, if not yet created.
-	BOOL copied = [self AF_copyFileFrom: databaseBundleURL
-		to: databaseURL
-		overwrite: overwrite];
-		
-	// Log if copy failed.
-    if (copied == NO)
-    {
-        AFLog(AFLogLevelError, @"Failed to copy database to documents directory");
-	}
-	
-	return copied;
-}
 
 - (id)execute: (SQLTaskDelegate)task
 	success: (BOOL *)success

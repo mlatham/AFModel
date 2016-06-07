@@ -142,9 +142,6 @@ static inline void AFRollbackTransaction(sqlite3 *database)
 
 #pragma mark - Methods
 
-+ (BOOL)initializeDatabaseNamed: (NSString *)databaseName
-	overwrite: (BOOL)overwrite;
-
 - (id)initWithDatabaseNamed: (NSString *)databaseName;
 
 - (id)execute: (SQLTaskDelegate)task
