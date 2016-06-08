@@ -1,15 +1,24 @@
-#import "sqlite3.h"
-
-
-#pragma mark Type Definitions
-
-typedef id (^SQLTaskDelegate)(sqlite3 *database, BOOL *success);
-typedef void (^SQLCompletedDelegate)(id result, BOOL success);
-typedef id DBExecutionToken;
+#ifndef AF_SQLITE_TYPEDEFS_H
+#define AF_SQLITE_TYPEDEFS_H
 
 
 #pragma mark - Helper Functions
-    
+
+static inline NSError *AFSqliteErrorFromException(NSException *exception)
+{
+	const int ERROR_CODE = 666;
+
+	// Mark as failed.
+	NSDictionary *userInfo = @{
+		NSLocalizedDescriptionKey : [exception description]
+	};
+	
+	// Create an error.
+	return [NSError errorWithDomain: @"AFSqliteError"
+		code: ERROR_CODE
+		userInfo: userInfo];
+}
+
 static inline void AFBindColumnString(sqlite3_stmt *statement, int column, NSString *string)
 {
 	if (AFIsNull(string) == YES)
@@ -130,34 +139,13 @@ static inline void AFRollbackTransaction(sqlite3 *database)
 }
 
 
-#pragma mark - Class Interface
+#pragma mark - Type Definitions
 
-@interface AFDBClient : NSObject
+typedef id		(^SQLQueryBlock)(sqlite3 *database, NSError **error);
+typedef void	(^SQLQueryCompletion)(id result, NSError *error);
 
-
-#pragma mark - Properties
-
-@property (nonatomic, readonly) NSURL *databaseURL;
-
-
-#pragma mark - Methods
-
-- (id)initWithDatabaseNamed: (NSString *)databaseName;
-
-- (id)execute: (SQLTaskDelegate)task
-	success: (BOOL *)success;
-
-- (DBExecutionToken)beginExecution: (SQLTaskDelegate)task
-	completion: (SQLCompletedDelegate)completion;
-
-- (BOOL)isExecutionCompleted: (DBExecutionToken)token;
-
-- (void)cancelExecution: (DBExecutionToken)token;
-- (void)endExecution: (DBExecutionToken)token;
-
-- (void)resetOperationQueue;
-
-- (void)resetDatabase;
+typedef void	(^SQLStatementBlock)(sqlite3 *database, NSError **error);
+typedef void	(^SQLStatementCompletion)(NSError *error);
 
 
-@end
+#endif /* AF_SQLITE_TYPEDEFS_H */

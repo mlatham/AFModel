@@ -10,7 +10,7 @@
 #import "AFKVO.h"
 
 // SQLite helpers
-#import "AFDBClient.h"
+#import "AFSqliteClient.h"
 
 // Object provider
 #import "AFObjectProvider.h"

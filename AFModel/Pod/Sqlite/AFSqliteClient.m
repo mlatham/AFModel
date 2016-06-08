@@ -1,5 +1,4 @@
-#import "AFDBClient.h"
-#import "AFDBOperation.h"
+#import "AFSqliteClient.h"
 
 
 #pragma mark Constants
@@ -16,7 +15,7 @@ static NSURL *_documentsURL;
 
 #pragma mark - Class Definition
 
-@implementation AFDBClient
+@implementation AFSqliteClient
 {
 	@private BOOL _connected;
 	@private sqlite3 *_database;
@@ -91,32 +90,25 @@ static NSURL *_documentsURL;
 
 #pragma mark - Public Methods
 
-- (id)execute: (SQLTaskDelegate)task
-	success: (BOOL *)success
+- (void)execute: (SQLStatementBlock)statement
+	error: (NSError **)error
 {
-    // Start assuming success.
-    *success = YES;
-
     // Acquire re-entrant lock.
     [_databaseLock lock];
     
     // Execute query.
     @try 
     {
-        // Send query to delegate query.
-        id result = task(_database, success);
-        
-        // Return result.
-        return result;
+        // Execute statement.
+        statement(_database, error);
     } 
     
     @catch (NSException *e)
     {
-        // Fail.
-        *success = NO;
-
-        // Rethrow.
-        @throw e;
+		// Convert the exception to an error.
+		*error = AFSqliteErrorFromException(e);
+	
+		// Don't re-throw.
     }
     
     @finally 
@@ -126,15 +118,47 @@ static NSURL *_documentsURL;
 	}
 }
 
-- (DBExecutionToken)beginExecution: (SQLTaskDelegate)task
-	completion: (SQLCompletedDelegate)completion
+- (id)query: (SQLQueryBlock)query
+	error: (NSError **)error
 {
-    // Create db operation.
-    AFDBOperation *operation = [[AFDBOperation alloc]
-        initWithDatabase: _database 
-        lock: _databaseLock
-        task: task 
-        completion: completion];
+	// Acquire re-entrant lock.
+    [_databaseLock lock];
+	
+	id result = nil;
+	
+    // Execute query.
+    @try 
+    {
+        // Execute statement.
+        result = query(_database, error);
+    } 
+    
+    @catch (NSException *e)
+    {
+		// Convert the exception to an error.
+		*error = AFSqliteErrorFromException(e);
+	
+		// Don't re-throw.
+    }
+    
+    @finally 
+    {
+        // Release lock.
+        [_databaseLock unlock];
+	}
+	
+	return result;
+}
+
+- (AFSqliteOperation *)beginStatement: (SQLStatementBlock)statement
+	completion: (SQLStatementCompletion)completion
+{
+	// Create db operation.
+    AFSqliteOperation *operation = [[AFSqliteOperation alloc]
+        initWithDatabase: _database
+		lock: _databaseLock
+		statementBlock: statement
+		statementCompletion: completion];
     [operation setThreadPriority: 0.3];
         
     // Queue operation.
@@ -144,27 +168,43 @@ static NSURL *_documentsURL;
     return operation;
 }
 
-- (BOOL)isExecutionCompleted: (DBExecutionToken)token
+- (AFSqliteOperation *)beginQuery: (SQLQueryBlock)statement
+	completion: (SQLQueryCompletion)completion
+{
+	// Create db operation.
+    AFSqliteOperation *operation = [[AFSqliteOperation alloc]
+        initWithDatabase: _database
+		lock: _databaseLock
+		queryBlock: statement
+		queryCompletion: completion];
+    [operation setThreadPriority: 0.3];
+        
+    // Queue operation.
+    [_asyncQueryQueue addOperation: operation];
+    
+    // Return operation as token.
+    return operation;
+}
+
+- (BOOL)isExecutionCompleted: (AFSqliteOperation *)operation
 {
     NSArray *operations = [_asyncQueryQueue operations];
-    NSUInteger operationIndex = [operations indexOfObjectIdenticalTo: token];
+    NSUInteger operationIndex = [operations indexOfObjectIdenticalTo: operation];
     return operationIndex != NSNotFound;
 }
 
-- (void)endExecution: (DBExecutionToken)token
+- (void)endExecution: (AFSqliteOperation *)operation
 {
-    if ([self isExecutionCompleted: token] == NO)
+    if ([self isExecutionCompleted: operation] == NO)
     {
-        NSOperation *operation = token;
         [operation waitUntilFinished];
     }
 }
 
-- (void)cancelExecution: (DBExecutionToken)token
+- (void)cancelExecution: (AFSqliteOperation *)operation
 {
-    if ([self isExecutionCompleted: token] == NO)
+    if ([self isExecutionCompleted: operation] == NO)
     {
-        NSOperation *operation = token;
         [operation cancel];
     }
 }

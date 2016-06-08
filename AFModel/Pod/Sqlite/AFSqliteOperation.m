@@ -1,4 +1,4 @@
-#import "AFDBOperation.h"
+#import "AFSqliteOperation.h"
 
 
 #pragma mark Constants
@@ -6,15 +6,22 @@
 static NSString * const FinishedKeyPath = @"isFinished";
 static NSString * const ExecutingKeyPath = @"isExecuting";
 
+#define RESULT_KEY @"result"
+#define ERROR_KEY @"error"
+
 
 #pragma mark - Class Definition
 
-@implementation AFDBOperation
+@implementation AFSqliteOperation
 {
+    @private SQLStatementBlock _statementBlock;
+    @private SQLStatementCompletion _statementCompletion;
+	
+	@private SQLQueryBlock _queryBlock;
+	@private SQLQueryCompletion _queryCompletion;
+	
 	@private UIBackgroundTaskIdentifier _exitBackgroundTask;
     @private NSRecursiveLock *_databaseLock;
-    @private id (^_task)(sqlite3 *, BOOL *);
-    @private void (^_completion)(id, BOOL);
     @private sqlite3 *_database;
 	@private BOOL _executing;
 	@private BOOL _finished;
@@ -26,10 +33,10 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 
 - (id)initWithDatabase: (sqlite3 *)database
     lock: (NSRecursiveLock *)databaseLock
-    task: (id (^)(sqlite3 *database, BOOL *success))task
-    completion: (void (^)(id result, BOOL success))completion
+    statementBlock: (SQLStatementBlock)statementBlock
+    statementCompletion: (SQLStatementCompletion)statementCompletion
 {
-	if (!(self = [super init]))
+	if ((self = [super init]) == NO)
 	{
 		return nil;
 	}
@@ -37,11 +44,39 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 	// Initialize instance variables.
     _database = database;
     _databaseLock = databaseLock;
-    _task = [task copy];
-    _completion = AFIsNull(completion) 
-		? nil 
-		: [completion copy];
+	_statementBlock = AFIsNull(statementBlock) == NO
+		? [statementBlock copy]
+		: nil;
+	_statementCompletion = AFIsNull(statementCompletion) == NO
+		? [statementCompletion copy]
+		: nil;
+	
+	// Immediately begin a background task.
+	[self AF_beginExitBackgroundTask];
+	
+	return self;
+}
 
+- (id)initWithDatabase: (sqlite3 *)database
+    lock: (NSRecursiveLock *)databaseLock
+    queryBlock: (SQLQueryBlock)queryBlock
+    queryCompletion: (SQLQueryCompletion)queryCompletion
+{
+	if ((self = [super init]) == NO)
+	{
+		return nil;
+	}
+    
+	// Initialize instance variables.
+    _database = database;
+    _databaseLock = databaseLock;
+	_queryBlock = AFIsNull(queryBlock) == NO
+		? [queryBlock copy]
+		: nil;
+	_queryCompletion = AFIsNull(queryCompletion) == NO
+		? [queryCompletion copy]
+		: nil;
+	
 	// Immediately begin a background task.
 	[self AF_beginExitBackgroundTask];
 	
@@ -76,7 +111,8 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 		[self didChangeValueForKey: FinishedKeyPath];
 		
 		// callback delegate, if required
-		if (AFIsNull(_completion) == NO)
+		if (AFIsNull(_statementCompletion) == NO
+			|| AFIsNull(_queryCompletion) == NO)
 		{
 			[self performSelectorOnMainThread: @selector(AF_raiseCancelled) 
 				withObject: nil 
@@ -108,7 +144,7 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 	{
 		BOOL databaseLockAquired = NO;
 		BOOL databaseRollbackRequired = NO;
-		BOOL success = NO;
+		NSError *error = nil;
 		id result = nil;
 		@try 
 		{           
@@ -143,23 +179,29 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 				return;
 			}
 
-			// perform task
-			success = YES;
-			result = _task(_database, &success);
+			// Only one of these blocks should be set - a query or a statement.
+			if (AFIsNull(_queryBlock) == NO)
+			{
+				result = _queryBlock(_database, &error);
+			}
+			else
+			{
+				_statementBlock(_database, &error);
+			}
 					
-			// abort if cancelled
+			// Abort if cancelled.
 			if ([self isCancelled] == YES)
 			{
 				return;
 			}
 
-			// commit transaction on success
-			if (success == YES)
+			// Commit transaction on success.
+			if (error == nil)
 			{
-				// mark rollback as not required
+				// Mark rollback as not required.
 				databaseRollbackRequired = NO;
 				
-				// throw if commit fails
+				// Throw if commit fails.
 				if (sqlite3_exec(_database, "COMMIT TRANSACTION", NULL, NULL, NULL) 
 					!= SQLITE_OK)
 				{
@@ -169,28 +211,28 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 				}
 			}
 			
-			// release database lock
+			// Release database lock.
 			[_databaseLock unlock];
 			databaseLockAquired = NO;
 		}
 		
-		// handle any exceptions
+		// Handle any exceptions.
 		@catch (NSException *e) 
 		{
-			// simply log exceptions
+			// Simply log exceptions.
 			AFLog(AFLogLevelError, @"async database execution exception: %@", [e reason]);
 			
-			// mark as failed
-			success = NO;
+			// Convert the exception to an error.
+			error = AFSqliteErrorFromException(e);
 		}
 		
-		// complete operation
+		// Complete operation.
 		@finally
 		{
-			// rollback if required
+			// Rollback if required.
 			if (databaseRollbackRequired == YES)
 			{
-				// log error if rollback fails
+				// Log error if rollback fails.
 				if (sqlite3_exec(_database, "ROLLBACK TRANSACTION", NULL, NULL, 
 					NULL) != SQLITE_OK)
 				{
@@ -204,15 +246,18 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 				[_databaseLock unlock];
 			}
 
-			// raise completed (if required)
+			BOOL hasCallback = AFIsNull(_statementCompletion) == NO
+				|| AFIsNull(_queryCompletion) == NO;
+
+			// Raise completed (if required).
 			if ([self isCancelled] == NO 
-				&& AFIsNull(_completion) == NO)
+				&& hasCallback == YES)
 			{
-				[self performSelectorOnMainThread: @selector(AF_raiseCompleted:) 
-					withObject: [NSArray arrayWithObjects:
-						result == nil ? [NSNull null] : result,
-						[NSNumber numberWithBool: success], 
-						nil]                    
+				[self performSelectorOnMainThread: @selector(AF_raiseCompleted:)
+					withObject: @{
+						RESULT_KEY : result,
+						ERROR_KEY : error
+					}
 					waitUntilDone: YES];		
 			}
 		
@@ -270,18 +315,25 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
     _exitBackgroundTask = UIBackgroundTaskInvalid;
 }
 
-- (void)AF_raiseCompleted: (NSArray *)data
+- (void)AF_raiseCompleted: (NSDictionary *)data
 {
 	// Immediately begin a background task.
 	[self AF_endExitBackgroundTask];
 
 	// Raise completion.
-    id result = [data objectAtIndex: 0];
-    BOOL success = [[data objectAtIndex: 1]
-        boolValue];
-    _completion(AFIsNull(result)
-		? nil
-		: result, success);
+    NSError *error = [data objectForKey: ERROR_KEY];
+	if (AFIsNull(_queryCompletion) == NO)
+	{
+		id result = [data objectForKey: RESULT_KEY];
+		
+		// Call completion.
+		_queryCompletion(result, error);
+	}
+	else
+	{
+		// Call completion.
+		_statementCompletion(error);
+	}
 }
 
 - (void)AF_raiseCancelled
@@ -290,7 +342,16 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 	[self AF_endExitBackgroundTask];
 	
 	// Raise completion.
-	_completion(nil, NO);
+	if (AFIsNull(_queryCompletion) == NO)
+	{
+		// Call completion.
+		_queryCompletion(nil, nil);
+	}
+	else
+	{
+		// Call completion.
+		_statementCompletion(nil);
+	}
 }
 
 
