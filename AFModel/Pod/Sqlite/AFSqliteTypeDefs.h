@@ -96,6 +96,32 @@ static inline NSDate *AFColumnDate(sqlite3_stmt *statement, int column)
 	}
 }
 
+static inline NSNumber *AFColumnIntNumber(sqlite3_stmt *statement, int column)
+{
+	if (sqlite3_column_type(statement, column) == SQLITE_NULL)
+	{
+		return nil;
+	}
+	else
+	{
+		int value = sqlite3_column_int(statement, column);
+		return [NSNumber numberWithInt: value];
+	}
+}
+
+static inline NSNumber *AFColumnDoubleNumber(sqlite3_stmt *statement, int column)
+{
+	if (sqlite3_column_type(statement, column) == SQLITE_NULL)
+	{
+		return nil;
+	}
+	else
+	{
+		double value = sqlite3_column_double(statement, column);
+		return [NSNumber numberWithDouble: value];
+	}
+}
+
 static inline BOOL AFColumnIsNullOrFalse(sqlite3_stmt *statement, int column)
 {
 	return sqlite3_column_type(statement, column) == SQLITE_NULL
