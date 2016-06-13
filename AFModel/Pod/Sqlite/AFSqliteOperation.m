@@ -253,11 +253,20 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 			if ([self isCancelled] == NO 
 				&& hasCallback == YES)
 			{
+				NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+				
+				if (result != nil)
+				{
+					dictionary[RESULT_KEY] = result;
+				}
+				
+				if (error != nil)
+				{
+					dictionary[ERROR_KEY] = error;
+				}
+			
 				[self performSelectorOnMainThread: @selector(AF_raiseCompleted:)
-					withObject: @{
-						RESULT_KEY : result,
-						ERROR_KEY : error
-					}
+					withObject: dictionary
 					waitUntilDone: YES];		
 			}
 		

@@ -16,9 +16,9 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		8125AFDE1D0F2B53002C1F10 /* AFSqliteClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8125AFDA1D0F2B53002C1F10 /* AFSqliteClient.m */; };
+		8125AFDF1D0F2B53002C1F10 /* AFSqliteOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8125AFDC1D0F2B53002C1F10 /* AFSqliteOperation.m */; };
 		812A9F8C1CE23EDE00F48CFE /* AFPropertyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 812A9F8B1CE23EDE00F48CFE /* AFPropertyHelper.m */; };
-		813A6D611D05C808006D43E5 /* AFSqliteClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 813A6D601D05C808006D43E5 /* AFSqliteClient.m */; };
-		813A6D641D05CE3D006D43E5 /* AFSqliteOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 813A6D631D05CE3D006D43E5 /* AFSqliteOperation.m */; };
 		813A6D691D05D524006D43E5 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 813A6D681D05D524006D43E5 /* libsqlite3.tbd */; };
 		86AE39292A5E421AA6D666AC /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A8AE346F5D470A8B80C0DD /* libPods-Tests.a */; };
 		C9A7C21B1978736100C367AC /* AFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A7C1F71978736100C367AC /* AFAppDelegate.m */; };
@@ -61,15 +61,15 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		8125AFD91D0F2B53002C1F10 /* AFSqliteClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSqliteClient.h; sourceTree = "<group>"; };
+		8125AFDA1D0F2B53002C1F10 /* AFSqliteClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSqliteClient.m; sourceTree = "<group>"; };
+		8125AFDB1D0F2B53002C1F10 /* AFSqliteOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSqliteOperation.h; sourceTree = "<group>"; };
+		8125AFDC1D0F2B53002C1F10 /* AFSqliteOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSqliteOperation.m; sourceTree = "<group>"; };
+		8125AFDD1D0F2B53002C1F10 /* AFSqliteTypeDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSqliteTypeDefs.h; sourceTree = "<group>"; };
 		812A9F8A1CE23EDE00F48CFE /* AFPropertyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyHelper.h; sourceTree = "<group>"; };
 		812A9F8B1CE23EDE00F48CFE /* AFPropertyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPropertyHelper.m; sourceTree = "<group>"; };
-		813A6D5F1D05C808006D43E5 /* AFSqliteClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSqliteClient.h; sourceTree = "<group>"; };
-		813A6D601D05C808006D43E5 /* AFSqliteClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSqliteClient.m; sourceTree = "<group>"; };
-		813A6D621D05CE3D006D43E5 /* AFSqliteOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSqliteOperation.h; sourceTree = "<group>"; };
-		813A6D631D05CE3D006D43E5 /* AFSqliteOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSqliteOperation.m; sourceTree = "<group>"; };
 		813A6D681D05D524006D43E5 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		ACD8EABB703140DB9D49DDB8 /* Pods-AFModel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AFModel.xcconfig"; path = "Pods/Pods-AFModel.xcconfig"; sourceTree = "<group>"; };
-		C90AF01C1D08708400AD4FF7 /* AFSqliteTypeDefs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSqliteTypeDefs.h; sourceTree = "<group>"; };
 		C9776FBB197852AC00A58ABD /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C9776FBD197852AC00A58ABD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C9A7C1671978574300C367AC /* AFModel.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AFModel.podspec; sourceTree = "<group>"; };
@@ -209,17 +209,18 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		813A6D5E1D05C7F9006D43E5 /* Sqlite */ = {
+		8125AFD81D0F2B53002C1F10 /* Sqlite */ = {
 			isa = PBXGroup;
 			children = (
-				813A6D5F1D05C808006D43E5 /* AFSqliteClient.h */,
-				813A6D601D05C808006D43E5 /* AFSqliteClient.m */,
-				813A6D621D05CE3D006D43E5 /* AFSqliteOperation.h */,
-				813A6D631D05CE3D006D43E5 /* AFSqliteOperation.m */,
-				C90AF01C1D08708400AD4FF7 /* AFSqliteTypeDefs.h */,
+				8125AFD91D0F2B53002C1F10 /* AFSqliteClient.h */,
+				8125AFDA1D0F2B53002C1F10 /* AFSqliteClient.m */,
+				8125AFDB1D0F2B53002C1F10 /* AFSqliteOperation.h */,
+				8125AFDC1D0F2B53002C1F10 /* AFSqliteOperation.m */,
+				8125AFDD1D0F2B53002C1F10 /* AFSqliteTypeDefs.h */,
 			);
-			path = Sqlite;
-			sourceTree = "<group>";
+			name = Sqlite;
+			path = AFModel/Pod/Sqlite;
+			sourceTree = SOURCE_ROOT;
 		};
 		C9A7C1F51978736100C367AC /* Example */ = {
 			isa = PBXGroup;
@@ -239,7 +240,7 @@
 				C9A7C1FC1978736100C367AC /* AFModel-Includes.h */,
 				C9A7C2001978736100C367AC /* Common */,
 				C9A7C20D1978736100C367AC /* ObjectProvider */,
-				813A6D5E1D05C7F9006D43E5 /* Sqlite */,
+				8125AFD81D0F2B53002C1F10 /* Sqlite */,
 			);
 			path = Pod;
 			sourceTree = "<group>";
@@ -458,8 +459,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9A7C2261978736100C367AC /* AFRelationship.m in Sources */,
-				813A6D611D05C808006D43E5 /* AFSqliteClient.m in Sources */,
-				813A6D641D05CE3D006D43E5 /* AFSqliteOperation.m in Sources */,
+				8125AFDE1D0F2B53002C1F10 /* AFSqliteClient.m in Sources */,
+				8125AFDF1D0F2B53002C1F10 /* AFSqliteOperation.m in Sources */,
 				C9A7C2241978736100C367AC /* AFObjectProvider.m in Sources */,
 				C9A7C2251978736100C367AC /* AFPropertyInfo.m in Sources */,
 				C9A7C21B1978736100C367AC /* AFAppDelegate.m in Sources */,
