@@ -53,11 +53,11 @@ static char PROPERTY_INFO_KEY;
 			
 			// This is the property - get its attributes.
 			const char *attributesCString = property_getAttributes(property);
-			NSString *attributes = [NSString stringWithUTF8String: attributesCString];
+			NSString *attributes = [[NSString stringWithUTF8String: attributesCString] copy];
 			
 			// Get the property name.
 			const char *testPropertyNameCString = property_getName(property);
-			NSString *testPropertyName = [NSString stringWithUTF8String: testPropertyNameCString];
+			NSString *testPropertyName = [[NSString stringWithUTF8String: testPropertyNameCString] copy];
 			
 			// Create the property info.
 			AFPropertyInfo *propertyInfo = [[AFPropertyInfo alloc]

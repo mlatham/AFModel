@@ -66,7 +66,7 @@ static inline NSString *AFColumnText(sqlite3_stmt *statement, int column)
 	}
 	else
 	{
-		return [NSString stringWithUTF8String: text];
+		return [[NSString stringWithUTF8String: text] copy];
 	}
 }
 
