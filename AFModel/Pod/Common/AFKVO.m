@@ -53,6 +53,7 @@
 	// Initialize instance variables.
     _contexts = [[NSMutableArray alloc]
         init];
+	_callOnUIThread = YES;
 	_target = target;
 
     // Return initialized instance.
