@@ -42,8 +42,8 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 	}
     
 	// Initialize instance variables.
-    _database = database;
-    _databaseLock = databaseLock;
+	_database = database;
+	_databaseLock = databaseLock;
 	_statementBlock = AFIsNull(statementBlock) == NO
 		? [statementBlock copy]
 		: nil;
@@ -66,10 +66,10 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 	{
 		return nil;
 	}
-    
+	
 	// Initialize instance variables.
-    _database = database;
-    _databaseLock = databaseLock;
+	_database = database;
+	_databaseLock = databaseLock;
 	_queryBlock = AFIsNull(queryBlock) == NO
 		? [queryBlock copy]
 		: nil;
