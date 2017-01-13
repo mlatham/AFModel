@@ -204,17 +204,17 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 			state = AFReachabilityStateOffline;
 		}
 		
-		if ((flags & kSCNetworkReachabilityFlagsReachable) == 0)
+		if ((updateFlags & kSCNetworkReachabilityFlagsReachable) == 0)
 		{
 			networkType = AFNetworkTypeOffline;
 		}
-		else if (((((flags & kSCNetworkReachabilityFlagsConnectionOnDemand ) != 0) ||
-			(flags & kSCNetworkReachabilityFlagsConnectionOnTraffic) != 0)) &&
-			(flags & kSCNetworkReachabilityFlagsInterventionRequired) == 0)
+		else if (((((updateFlags & kSCNetworkReachabilityFlagsConnectionOnDemand ) != 0) ||
+			(updateFlags & kSCNetworkReachabilityFlagsConnectionOnTraffic) != 0)) &&
+			(updateFlags & kSCNetworkReachabilityFlagsInterventionRequired) == 0)
 		{
 			networkType = AFNetworkTypeWiFi;
 		}
-		else if ((flags & kSCNetworkReachabilityFlagsIsWWAN) == kSCNetworkReachabilityFlagsIsWWAN)
+		else if ((updateFlags & kSCNetworkReachabilityFlagsIsWWAN) == kSCNetworkReachabilityFlagsIsWWAN)
 		{
 			networkType = AFNetworkTypeWWAN;
 		}
