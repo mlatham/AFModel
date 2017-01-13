@@ -34,7 +34,10 @@ extern NSString * const AFReachability_StateKeyPath;
 
 #pragma mark - Properties
 
+@property (nonatomic, readonly) NSString *stateString;
 @property (nonatomic, readonly) AFReachabilityState state;
+
+@property (nonatomic, readonly) NSString *networkTypeString;
 @property (nonatomic, readonly) AFNetworkType networkType;
 
 

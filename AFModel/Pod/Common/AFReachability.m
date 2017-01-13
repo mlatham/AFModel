@@ -19,7 +19,6 @@ NSString * const AFReachability_StateKeyPath = @"state";
 @implementation AFReachability
 {
 	@private SCNetworkReachabilityRef _reachabilityRef;
-	@private Reachability *_reachability;
 }
 
 
@@ -34,31 +33,44 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 
 #pragma mark - Properties
 
+- (NSString *)stateString
+{
+	switch (_state)
+	{
+		case AFReachabilityStateOnline:
+			return @"ONLINE";
+			
+		case AFReachabilityStateOffline:
+			return @"OFFLINE";
+			
+		case AFReachabilityStateUnknown:
+			return @"UNKNOWN";
+	}
+}
+
 - (void)setState: (AFReachabilityState)state
 {
 	_state = state;
 }
 
-- (AFNetworkType)networkType
+- (NSString *)networkTypeString
 {
-	NetworkStatus status = [reachability currentReachabilityStatus];
+	switch (_networkType)
+	{
+		case AFNetworkTypeUnknown:
+			return @"UNKNOWN";
+		case AFNetworkTypeOffline:
+			return @"OFFLINE";
+		case AFNetworkTypeWiFi:
+			return @"WIFI";
+		case AFNetworkTypeWWAN:
+			return @"WWAN";
+	}
+}
 
-	if (status == NotReachable)
-	{
-		return AFNetworkTypeOffline;
-	}
-	else if (status == ReachableViaWiFi)
-	{
-		return AFNetworkTypeWiFi;
-	}
-	else if (status == ReachableViaWWAN) 
-	{
-		return AFNetworkTypeWWAN;
-	}
-	else
-	{
-		return AFNetworkTypeUnknown;
-	}
+- (void)setNetworkType: (AFNetworkType)networkType
+{
+	_networkType = networkType;
 }
 
 
@@ -121,8 +133,6 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 	// Initialize instance variables.
 	_state = AFReachabilityStateUnknown;
 	_networkType = AFNetworkTypeUnknown;
-	_reachability = [Reachability reachabilityForInternetConnection];
-	[_reachability startNotifier];
 	
 	// Return initialized instance.
 	return self;
@@ -174,31 +184,59 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 - (void)updateStateForFlags: (SCNetworkReachabilityFlags)flags
 {
 	AFReachabilityState state = AFReachabilityStateOffline;
+	AFNetworkType networkType = AFNetworkTypeUnknown;
 	
 	SCNetworkReachabilityFlags updateFlags;
 	BOOL success = SCNetworkReachabilityGetFlags(_reachabilityRef, &updateFlags);
 	
 	// Determine state.
-    if (success == YES
-		&& (updateFlags & kSCNetworkFlagsReachable)
-		&& !(updateFlags & kSCNetworkFlagsConnectionRequired))
-    {
-        // Target host is reachable.
-        state = AFReachabilityStateOnline;
-    }
+    if (success == YES)
+	{
+		if (updateFlags & kSCNetworkFlagsReachable)
+			&& !(updateFlags & kSCNetworkFlagsConnectionRequired))
+		{
+			// Target host is reachable.
+			state = AFReachabilityStateOnline;
+		}
+		else
+		{
+			// Target host is reachable.
+			state = AFReachabilityStateOffline;
+		}
+		
+		if ((flags & kSCNetworkReachabilityFlagsReachable) == 0)
+		{
+			networkType = AFNetworkTypeOffline;
+		}
+		else if (((((flags & kSCNetworkReachabilityFlagsConnectionOnDemand ) != 0) ||
+			(flags & kSCNetworkReachabilityFlagsConnectionOnTraffic) != 0)) &&
+			(flags & kSCNetworkReachabilityFlagsInterventionRequired) == 0)
+		{
+			networkType = AFNetworkTypeWiFi;
+		}
+		else if ((flags & kSCNetworkReachabilityFlagsIsWWAN) == kSCNetworkReachabilityFlagsIsWWAN)
+		{
+			networkType = AFNetworkTypeWWAN;
+		}
+	}
 	else
 	{
-		// Target host is not reachable.
+		// Target host is reachable.
 		state = AFReachabilityStateOffline;
+		networkType = AFNetworkTypeOffline;
 	}
 	
 	// Set state, if required.
 	if (self.state != state)
 	{
-		AFLog(AFLogLevelDebug, @"Reachability: %@", state == AFReachabilityStateOnline
-			? @"ONLINE"
-			: @"OFFLINE");
 		self.state = state;
+		AFLog(AFLogLevelDebug, @"Reachability: %@", self.stateString);
+	}
+	
+	if (self.networkType != networkType)
+	{
+		self.networkType = networkType;
+		AFLog(AFLogLevelDebug, @"Network type: %@", self.networkType);
 	}
 }
 
