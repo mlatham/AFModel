@@ -192,7 +192,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 	// Determine state.
     if (success == YES)
 	{
-		if (updateFlags & kSCNetworkFlagsReachable)
+		if ((updateFlags & kSCNetworkFlagsReachable)
 			&& !(updateFlags & kSCNetworkFlagsConnectionRequired))
 		{
 			// Target host is reachable.
