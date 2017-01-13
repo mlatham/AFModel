@@ -208,15 +208,13 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 		{
 			networkType = AFNetworkTypeOffline;
 		}
-		else if (((((updateFlags & kSCNetworkReachabilityFlagsConnectionOnDemand ) != 0) ||
-			(updateFlags & kSCNetworkReachabilityFlagsConnectionOnTraffic) != 0)) &&
-			(updateFlags & kSCNetworkReachabilityFlagsInterventionRequired) == 0)
-		{
-			networkType = AFNetworkTypeWiFi;
-		}
 		else if ((updateFlags & kSCNetworkReachabilityFlagsIsWWAN) == kSCNetworkReachabilityFlagsIsWWAN)
 		{
 			networkType = AFNetworkTypeWWAN;
+		}
+		else
+		{
+			networkType = AFNetworkTypeWiFi;
 		}
 	}
 	else
@@ -236,7 +234,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 	if (self.networkType != networkType)
 	{
 		self.networkType = networkType;
-		AFLog(AFLogLevelDebug, @"Network type: %@", self.networkType);
+		AFLog(AFLogLevelDebug, @"Network type: %@", self.networkTypeString);
 	}
 }
 
