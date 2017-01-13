@@ -19,6 +19,7 @@ NSString * const AFReachability_StateKeyPath = @"state";
 @implementation AFReachability
 {
 	@private SCNetworkReachabilityRef _reachabilityRef;
+	@private Reachability *_reachability;
 }
 
 
@@ -36,6 +37,28 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 - (void)setState: (AFReachabilityState)state
 {
 	_state = state;
+}
+
+- (AFNetworkType)networkType
+{
+	NetworkStatus status = [reachability currentReachabilityStatus];
+
+	if (status == NotReachable)
+	{
+		return AFNetworkTypeOffline;
+	}
+	else if (status == ReachableViaWiFi)
+	{
+		return AFNetworkTypeWiFi;
+	}
+	else if (status == ReachableViaWWAN) 
+	{
+		return AFNetworkTypeWWAN;
+	}
+	else
+	{
+		return AFNetworkTypeUnknown;
+	}
 }
 
 
@@ -97,6 +120,9 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 	
 	// Initialize instance variables.
 	_state = AFReachabilityStateUnknown;
+	_networkType = AFNetworkTypeUnknown;
+	_reachability = [Reachability reachabilityForInternetConnection];
+	[_reachability startNotifier];
 	
 	// Return initialized instance.
 	return self;

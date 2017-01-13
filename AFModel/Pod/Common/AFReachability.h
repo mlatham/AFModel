@@ -12,6 +12,15 @@ typedef enum
 	
 } AFReachabilityState;
 
+typedef enum
+{
+	AFNetworkTypeUnknown = 0,
+	AFNetworkTypeOffline,
+	AFNetworkTypeWiFi,
+	AFNetworkTypeWWAN
+	
+} AFNetworkType;
+
 
 #pragma mark - Constants
 
@@ -26,6 +35,7 @@ extern NSString * const AFReachability_StateKeyPath;
 #pragma mark - Properties
 
 @property (nonatomic, readonly) AFReachabilityState state;
+@property (nonatomic, readonly) AFNetworkType networkType;
 
 
 #pragma mark - Static Methods
