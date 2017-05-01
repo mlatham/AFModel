@@ -9,6 +9,91 @@
 
 #pragma mark - Public Methods
 
+- (void)_hydrateMockObject: (id)mockObject
+	objectModel: (AFObjectModel *)objectModel
+{
+	// Get the mapped values.
+	NSDictionary *relationshipsByPropertyKeyPath = objectModel.relationships;
+	
+	// Apply the mapped values, if present.
+	if (relationshipsByPropertyKeyPath != nil)
+	{
+		for (NSString *propertyKeyPath in [relationshipsByPropertyKeyPath allKeys])
+		{
+			// If a mapping exists and is valid, set the value.
+			id relationship = relationshipsByPropertyKeyPath[propertyKeyPath];
+			
+			if (AFIsNull(relationship) == NO
+				&& [relationship isKindOfClass: AFRelationship.class])
+			{
+				// Don't crash on failing a parse/set.
+				@try
+				{
+					// Use the relationship to get and set the value.
+					[relationship update: mockResult
+						values: values
+						propertyName: propertyKeyPath
+						provider: self];
+				}
+				@catch (NSException *exception)
+				{
+#if defined(DEBUG_OBJECT_PROVIDER)
+					AFLog(AFLogLevelDebug, @"Failed to parse value for property: %@. Error: %@", propertyKeyPath, exception);
+#endif
+				}
+			}
+		}
+	}
+}
+
+
+// Fabricate one of each model, returned under their root keys.
+- (NSDictionary *)fabricate
+{
+	NSMutableDictionary *results = [NSMutableDictionary dictionary];
+
+	NSDictionary *objectModelsByClassName = [AFObjectModel objectModels];
+	
+	NSMutableDictionary *mockResultByClassName = [NSMutableDictionary dictionary];
+	
+	// To establish links between objects, establish one of each object model, giving each a unique ID.
+	for (NSString *modelClassName in [objectModelsByClassName allKeys])
+	{
+		Class modelClass = NSClassFromString(modelClassName);
+		
+		// Use the format "modelName=-id" to represent a model's ID.
+		mockResultByClassName[modelClassName] = [self fetchOrCreate: modelClass
+			idValue: [NSString stringWithFormat: @"%@-id", modelClassName]];
+	}
+	
+	// For each object model, populate its properties (potentially linking to other models).
+	for (NSString *modelClassName in [objectModelsByClassName allKeys])
+	{
+		AFObjectModel *objectModel = objectModelsByClassName[modelClassName];
+	
+		// Get the mock result.
+		id mockResult = mockResultByClassName[modelClassName];
+	
+		// Hydrate the mock result.
+		
+		
+		
+		// Set the mock result under its root keys.
+		for (NSString *rootKey in objectModel.rootKeys)
+		{
+			results[rootKey] = mockResult;
+		}
+		
+		// Set the mock result under its collection keys.
+		for (NSString *collectionKey in objectModel.collectionKeys)
+		{
+			results[collectionKey] = @[ mockResult ];
+		}
+	}
+	
+	return results;
+}
+
 // Parse all root and collection keys in the provided values.
 - (NSDictionary *)parse: (NSDictionary *)values
 {

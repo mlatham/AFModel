@@ -8,6 +8,9 @@
 
 #pragma mark - Instance Methods
 
+// Fabricate one of each model, returned under their root keys.
+- (NSDictionary *)fabricate;
+
 // Parse all root and collection keys in the provided values.
 - (NSDictionary *)parse: (NSDictionary *)values;
 
