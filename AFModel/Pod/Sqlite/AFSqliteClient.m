@@ -217,7 +217,7 @@ static NSURL *_documentsURL;
 - (void)resetDatabase
 {
 	// Acquire re-entrant lock.
-    [_databaseLock lock];
+	[_databaseLock lock];
 
 	@try
 	{
@@ -236,13 +236,12 @@ static NSURL *_documentsURL;
 		// Re-open the connection.
 		[self openConnection];
 	}
-	
-	@finally 
-    {
-        // Release lock.
-        [_databaseLock unlock];
-	}
 
+	@finally 
+	{
+		// Release lock.
+		[_databaseLock unlock];
+	}
 }
 
 - (void)closeConnection
