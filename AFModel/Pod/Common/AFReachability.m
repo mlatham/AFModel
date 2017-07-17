@@ -1,6 +1,7 @@
 @import CoreFoundation;
 
 #import "AFReachability.h"
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <sys/socket.h>
 #import <netinet/in.h>
 #import <netinet6/in6.h>
@@ -55,17 +56,71 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 
 - (NSString *)networkTypeString
 {
-	switch (_networkType)
+	if (self.networkType == AFNetworkTypeWWAN)
 	{
-		case AFNetworkTypeUnknown:
-			return @"UNKNOWN";
-		case AFNetworkTypeOffline:
-			return @"OFFLINE";
-		case AFNetworkTypeWiFi:
-			return @"WIFI";
-		case AFNetworkTypeWWAN:
+		CTTelephonyNetworkInfo *telephonyInfo = [CTTelephonyNetworkInfo new];
+		NSString *currentRadio = telephonyInfo.currentRadioAccessTechnology;
+		
+		if ([currentRadio isEqualToString: CTRadioAccessTechnologyGPRS])
+		{
+			return @"GPRS";
+		}
+		else if ([currentRadio isEqualToString: CTRadioAccessTechnologyEdge])
+		{
+			return @"EDGE";
+		}
+		else if ([currentRadio isEqualToString: CTRadioAccessTechnologyWCDMA])
+		{
+			return @"WCDMA";
+		}
+		else if ([currentRadio isEqualToString: CTRadioAccessTechnologyHSDPA])
+		{
+			return @"HSDPA";
+		}
+		else if ([currentRadio isEqualToString: CTRadioAccessTechnologyHSUPA])
+		{
+			return @"HSUPA";
+		}
+		else if ([currentRadio isEqualToString: CTRadioAccessTechnologyCDMA1x])
+		{
+			return @"CDMA1X";
+		}
+		else if ([currentRadio isEqualToString: CTRadioAccessTechnologyCDMAEVDORev0])
+		{
+			return @"CDMAEVDOREV0";
+		}
+		else if ([currentRadio isEqualToString: CTRadioAccessTechnologyCDMAEVDORevA])
+		{
+			return @"CDMAEVDOREVA";
+		}
+		else if ([currentRadio isEqualToString: CTRadioAccessTechnologyCDMAEVDORevB])
+		{
+			return @"CDMAEVDOREVB";
+		}
+		else if ([currentRadio isEqualToString: CTRadioAccessTechnologyeHRPD])
+		{
+			return @"EHRPD";
+		}
+		else if ([currentRadio isEqualToString: CTRadioAccessTechnologyLTE])
+		{
+			return @"LTE";
+		}
+		else
+		{
+			// Default.
 			return @"WWAN";
+		}
 	}
+	else if (_reachability.networkType == AFNetworkTypeWiFi)
+	{
+		return @"WiFi";
+	}
+	else if (_reachability.networkType == AFNetworkTypeOffline)
+	{
+		return @"OFFLINE";
+	}
+
+	return @"UNKNOWN";
 }
 
 - (void)setNetworkType: (AFNetworkType)networkType
