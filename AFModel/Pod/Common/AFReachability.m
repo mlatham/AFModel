@@ -111,11 +111,11 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 			return @"WWAN";
 		}
 	}
-	else if (_reachability.networkType == AFNetworkTypeWiFi)
+	else if (self.networkType == AFNetworkTypeWiFi)
 	{
 		return @"WiFi";
 	}
-	else if (_reachability.networkType == AFNetworkTypeOffline)
+	else if (self.networkType == AFNetworkTypeOffline)
 	{
 		return @"OFFLINE";
 	}
