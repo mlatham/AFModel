@@ -19,6 +19,19 @@ static inline NSError *AFSqliteErrorFromException(NSException *exception)
 		userInfo: userInfo];
 }
 
+static inline void AFBindColumnDoubleNumber(sqlite3_stmt *statement, int column, NSNumber *number)
+{
+	if (AFIsNull(number) == YES)
+	{
+		sqlite3_bind_null(statement, column);
+	}
+	else
+	{
+		sqlite3_bind_double(statement, column, [number doubleValue]);
+	}
+}
+
+
 static inline void AFBindColumnIntNumber(sqlite3_stmt *statement, int column, NSNumber *number)
 {
 	if (AFIsNull(number) == YES)
