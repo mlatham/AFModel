@@ -135,29 +135,8 @@ static char PROPERTY_INFO_KEY;
 + (AFPropertyInfo *)propertyInfoForPropertyName: (NSString *)propertyName
 	className: (NSString *)className
 {
-	id class = NSClassFromString(className);
-	if (class == nil)
-	{
-        class = [self _swiftClassFromString: className];
-	}
-
 	return [self propertyInfoForPropertyName: propertyName
-		class: class];
-}
-
-
-#pragma mark - Private Methods
-
-// Source: https://stackoverflow.com/questions/24030814/swift-language-nsclassfromstring
-+ (Class)_swiftClassFromString: (NSString *)className {
-    NSString *appName = [[NSBundle mainBundle]
-    	objectForInfoDictionaryKey: @"CFBundleName"];
-	NSString *classStringName = [NSString stringWithFormat: @"_TtC%lu%@%lu%@",
-		(unsigned long)appName.length,
-		appName,
-		(unsigned long)className.length,
-    	className];
-    return NSClassFromString(classStringName);
+		class: NSClassFromString(className)];
 }
 
 

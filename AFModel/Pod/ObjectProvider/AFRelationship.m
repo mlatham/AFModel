@@ -233,6 +233,14 @@
 - (AFPropertyInfo *)propertyInfoForTarget: (id)target
 	propertyName: (NSString *)propertyName
 {
+	if ([target isKindOfClass: NSObject.class])
+	{
+		Class targetClass = [target class];
+	
+		return [AFPropertyHelper propertyInfoForPropertyName: propertyName
+			className: NSStringFromClass(targetClass)];
+	}
+
 	return [AFPropertyHelper propertyInfoForPropertyName: propertyName
 		class: [target class]];
 }
