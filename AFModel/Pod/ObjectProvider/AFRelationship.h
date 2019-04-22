@@ -19,45 +19,45 @@ typedef enum
 #pragma mark - Properties
 
 @property (nonatomic, assign, readonly) AFRelationshipType type;
-@property (nonatomic, strong, readonly) NSArray *keys;
+@property (nonatomic, strong, readonly) NSArray * _Nullable keys;
 
 
 #pragma mark - Constructors
 
-- (id)initWithKeys: (NSArray *)keys;
+- (id _Nonnull)initWithKeys: (NSArray * _Nonnull)keys;
 
-- (id)initWithHasMany: (Class)hasManyClass
-	keys: (NSArray *)keys;
+- (id _Nonnull)initWithHasMany: (Class _Nonnull)hasManyClass
+	keys: (NSArray * _Nonnull)keys;
 
 
 #pragma mark - Static Methods
 
 // Returns a relationship that resolves a single object or value and sets its value.
-+ (instancetype)key: (NSString *)key;
-+ (instancetype)keys: (NSArray *)keys;
++ (instancetype _Nonnull)key: (NSString * _Nonnull)key;
++ (instancetype _Nonnull)keys: (NSArray * _Nonnull)keys;
 
 // Returns a relationship that resolves one or many object instances and assigns them to a collection.
-+ (instancetype)hasMany: (Class)hasManyClass
-	keys: (NSArray *)keys;
-+ (instancetype)hasMany: (Class)hasManyClass
-	key: (NSString *)key;
++ (instancetype _Nonnull)hasMany: (Class _Nonnull)hasManyClass
+	keys: (NSArray * _Nonnull)keys;
++ (instancetype _Nonnull)hasMany: (Class _Nonnull)hasManyClass
+	key: (NSString * _Nonnull)key;
 
 
 #pragma mark - Instance Methods
 
 // Update the target object with a set of values.
-- (void)update: (id)object
-	values: (NSDictionary *)values
-	propertyName: (NSString *)propertyName
-	provider: (AFObjectProvider *)provider;
+- (void)update: (id _Nullable)object
+	values: (NSDictionary * _Nullable)values
+	propertyName: (NSString * _Nullable)propertyName
+	provider: (AFObjectProvider * _Nullable)provider;
 
 // Transform a value.
-- (id)transformValue: (id)value
-	toClass: (Class)toClass
-	provider: (AFObjectProvider *)provider;
+- (id _Nullable)transformValue: (id _Nullable)value
+	toClass: (Class _Nullable)toClass
+	provider: (AFObjectProvider * _Nullable)provider;
 
-- (AFPropertyInfo *)propertyInfoForTarget: (id)target
-	propertyName: (NSString *)propertyName;
+- (AFPropertyInfo * _Nullable)propertyInfoForTarget: (id _Nullable)target
+	propertyName: (NSString * _Nullable)propertyName;
 
 
 @end

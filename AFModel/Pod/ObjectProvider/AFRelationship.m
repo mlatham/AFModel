@@ -70,19 +70,19 @@
 
 #pragma mark - Public Methods
 
-+ (instancetype)key: (NSString *)key
++ (nonnull instancetype)key: (NSString *)key
 {
 	return [[self alloc]
 		initWithKeys: @[ key ]];
 }
 
-+ (instancetype)keys: (NSArray *)keys
++ (nonnull instancetype)keys: (NSArray *)keys
 {
 	return [[self alloc]
 		initWithKeys: keys];
 }
 
-+ (instancetype)hasMany: (Class)hasManyClass
++ (nonnull instancetype)hasMany: (Class)hasManyClass
 	keys: (NSArray *)keys
 {
 	return [[self alloc]
@@ -90,7 +90,7 @@
 		keys: keys];
 }
 
-+ (instancetype)hasMany: (Class)hasManyClass
++ (nonnull instancetype)hasMany: (Class)hasManyClass
 	key: (NSString *)key
 {
 	return [[self alloc]
