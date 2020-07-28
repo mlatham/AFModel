@@ -214,6 +214,20 @@ static NSURL *_documentsURL;
     [_asyncQueryQueue cancelAllOperations];
 }
 
+- (void)deleteDatabase
+{
+	[self closeConnection];
+	
+	// Delete the database file.
+	NSError *error = nil;
+	if ([_fileManager removeItemAtURL: _databaseURL
+		error: &error] == NO)
+	{
+		AFLog(AFLogLevelError, @"Failed to delete file at '%@' before overwiting: %@",
+			[_databaseURL absoluteString], [error localizedDescription]);
+	}
+}
+
 - (void)resetDatabase
 {
 	// Acquire re-entrant lock.
@@ -221,17 +235,8 @@ static NSURL *_documentsURL;
 
 	@try
 	{
-		// Close the connection.
-		[self closeConnection];
-		
-		// Delete the database file.
-		NSError *error = nil;
-		if ([_fileManager removeItemAtURL: _databaseURL
-			error: &error] == NO)
-		{
-			AFLog(AFLogLevelError, @"Failed to delete file at '%@' before overwiting: %@",
-				[_databaseURL absoluteString], [error localizedDescription]);
-		}
+		// Close the connection and delete database.
+		[self deleteDatabase];
 		
 		// Re-open the connection.
 		[self openConnection];
