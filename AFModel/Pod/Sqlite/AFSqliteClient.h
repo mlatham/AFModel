@@ -32,6 +32,7 @@
 - (void)cancelExecution: (AFSqliteOperation *)operation;
 - (void)endExecution: (AFSqliteOperation *)operation;
 
+- (void)deleteDatabase;
 - (void)resetOperationQueue;
 - (void)resetDatabase;
 
