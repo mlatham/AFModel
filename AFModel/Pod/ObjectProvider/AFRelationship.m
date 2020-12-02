@@ -233,15 +233,18 @@
 - (AFPropertyInfo *)propertyInfoForTarget: (id)target
 	propertyName: (NSString *)propertyName
 {
+	// Passing a swift string in here causes a crash without copying the string.
+	NSString *propertyNameCopy = [NSString stringWithString: propertyName];
+
 	if ([target isKindOfClass: NSObject.class])
 	{
 		Class targetClass = [target class];
 	
-		return [AFPropertyHelper propertyInfoForPropertyName: propertyName
+		return [AFPropertyHelper propertyInfoForPropertyName: propertyNameCopy
 			className: NSStringFromClass(targetClass)];
 	}
 
-	return [AFPropertyHelper propertyInfoForPropertyName: propertyName
+	return [AFPropertyHelper propertyInfoForPropertyName: propertyNameCopy
 		class: [target class]];
 }
 
